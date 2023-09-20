@@ -11,6 +11,7 @@
     <?php
         include("main.php");
     ?>
+    <img src="tabien.jpg" alt="tabien">
     <a href="https://github.com/pmerida08/DWES.git">Ver en github</a>
 </body>
 </html>
