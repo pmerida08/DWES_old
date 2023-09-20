@@ -11,6 +11,6 @@
     <?php
         include("main.php");
     ?>
-    <a href="https://github.com/pmerida08/HolaMundoPHP.git">Ver en github</a>
+    <a href="https://github.com/pmerida08/DWES.git">Ver en github</a>
 </body>
 </html>
