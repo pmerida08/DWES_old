@@ -16,7 +16,7 @@ ul {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     margin: 15px auto;
-    padding: 0;
+    padding: 40px;
 }
 
 a{
