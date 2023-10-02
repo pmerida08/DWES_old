@@ -8,11 +8,22 @@
     justify-content: center;
     min-height: 100vh;
     margin: 0;
+}
+
+.table1 > tbody{
     background-color: antiquewhite;
 }
 
 .column{
     margin: 0;
+}
+
+.column:nth-child(1){
+    background-color: aquamarine;
+}
+
+.row:nth-child(2){
+    background-color: cadetblue;
 }
 
 .row{
