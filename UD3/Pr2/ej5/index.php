@@ -12,8 +12,8 @@
 
 
 $meses = array('ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE');
-$mes = 3;
-$anio = 2024;
+$mes = 2;
+$anio = 2023;
 $dias = 0;
 
 switch ($mes) {
@@ -65,7 +65,7 @@ switch ($mes) {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 200px;
+            margin-top: 10%;
         }
 
         tbody{
@@ -83,6 +83,7 @@ switch ($mes) {
         td:hover{
             background-color: black;
             color: aliceblue;
+            border-radius: 900px;
         }
     </style>
 </head>
@@ -99,7 +100,7 @@ switch ($mes) {
                     echo '</td>';
                     ++$numDia;
                 } else {
-                    echo '<td></td>';
+                    echo '<td>&nbsp;</td>';
                 }
             }
             echo '</tr>';

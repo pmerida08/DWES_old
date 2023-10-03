@@ -2,7 +2,6 @@
 $datos = array(
     'nombre' => 'Pablo',
     'apellidos' => 'Merida Velasco',
-    'foto' => '',
     'logo' => 'PM3',
     'catprofesional' => 'Frontend Developer',
     'email' => 'pablomerida03@gmail.com',
