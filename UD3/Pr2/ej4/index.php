@@ -36,7 +36,7 @@
         for ($j=0; $j < 256; $j+=$sumRgb) { 
             for ($k=0; $k < 256; $k+=$sumRgb) {
                 $rgb = "rgb($i,$j,$k)";
-                echo "<td style='background-color:$rgb'>>$rgb</td>";
+                echo "<td style='background-color:$rgb'>$rgb</td>";
             }; 
         };
         echo '<tr>';
