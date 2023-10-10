@@ -14,19 +14,16 @@
     background-color: antiquewhite;
 }
 
-.column{
-    margin: 0;
-}
-
-.column:nth-child(1){
-    background-color: aquamarine;
-}
-
-.row:nth-child(2){
-    background-color: cadetblue;
-}
-
-.row{
+.fila{
     border: 5px solid black;
     padding: 5px 10px;
+}
+
+.columna{
+    padding: 25px;  
+}
+
+input{
+    width: 30px;
+    height: 30px;
 }

@@ -12,7 +12,7 @@
 
 
 $meses = array('ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE');
-$mes = 2;
+$mes = 10;
 $anio = 2023;
 $dias = 0;
 
@@ -43,7 +43,20 @@ switch ($mes) {
         break;
 }
 
-//$diaActual = date("j");
+$diaActual = date("d");
+$mesActual = date("m");
+$anioActual = date("Y");
+
+function esFestivo($diaF,$mesF){
+
+    $festivos = array(
+        '01-01',
+        '25-12',
+        '12-10'
+    );
+
+    $fecha = sprintf("%02d-%02d", $diaF, $mesF);
+};
 
 ?>
 
@@ -73,14 +86,14 @@ switch ($mes) {
             border-radius: 15px;
         }
 
-        td {
+        .dia {
             padding: 20px;
             font-size: 20px;
             transition: 0.3s ease-in-out;
             text-align: center;
         }
 
-        td:hover{
+        .dia:hover{
             background-color: black;
             color: aliceblue;
             border-radius: 900px;
@@ -94,10 +107,16 @@ switch ($mes) {
         for ($i = 1; $i <= 5; $i++) {
             echo '<tr>';
             for ($j = 1; $j <= 7; $j++) {
+                if ($numDia == $diaActual && $mes == $mesActual && $anioActual == $anio) {
+                    echo '<td class="dia today">';
+                } elseif (esFestivo($numDia, $mes)){
+
+                }
                 if ($numDia <= $dias) {
-                    echo '<td>';
+                    echo '<td class="dia">';
                     printf('%2d', $numDia);
                     echo '</td>';
+                    
                     ++$numDia;
                 } else {
                     echo '<td>&nbsp;</td>';
