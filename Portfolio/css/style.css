@@ -11,7 +11,7 @@
     --bg-100:#001F3F;
     --bg-200:#162e50;
     --bg-300:#31466a;
-    --font: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    --font: sans-serif, 'Franklin Gothic Medium';
 }
 
 *{
@@ -53,6 +53,7 @@ h2{
     align-items: center;
     flex-wrap: wrap;
     gap: 30px;
+    margin: 15px 0;
 }
 
 #contact{
@@ -82,14 +83,30 @@ h2{
     place-items: right;
 }
 
+a{
+    color:aliceblue;
+    text-decoration: wavy;
+    font-weight: 700;
+}
+
 .tags{
-    padding: 15px;
+    padding: 30px;
     border-radius: 10px;
     margin: 40px 40px;
     align-content: center;
     background-color: var(--bg-100);
     box-shadow: 0 0 10px black;
     color: var(--text-100);
+}
+
+.tags > h2{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.tags > p{
+    margin: 15px 0;
 }
 
 .lang {

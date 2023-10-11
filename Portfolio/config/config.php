@@ -9,6 +9,7 @@ $datos = array(
     'redessociales' => array(
         'twitter' => 'https://twitter.com/pmerida_',
         'linkdn' => 'https://www.linkedin.com/in/pablo-m%C3%A9rida-10a2ab221/',
+        'github' => 'https://github.com/pmerida08/DWES',
     ),
     'resumen' => 'Lorem ipsum no he que no he cuanto',
     'trabajos' => array(

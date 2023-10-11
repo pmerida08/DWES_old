@@ -13,6 +13,7 @@
      $logo = $datos['logo'];
      $email = $datos['email'];
      $telefono = $datos['telefono'];
+     $github = $datos['redessociales']['github']
 ?>
 
 <!DOCTYPE html>
@@ -99,10 +100,11 @@
         </div>
         <div class="tags">
             <h2>CONTACT</h2> 
-            <p>Gmail: <?php echo $email?></p>
-            <p>Telefono: <?php echo $telefono?></p>
+            <p>Gmail: <?php echo $email?></p><br>
+            <p>Telefono: <?php echo $telefono?></p><br>
+            <p>Github: <a href="<?php echo $github?>">pmerida08</a></p>
             <section id="contact">
-                <form class="form">
+            <form class="form">
                     <label for="name">Name:</label><br>
                     <input type="text" id="name" name="name" placeholder="Enter your name: "><br>
                     <label for="email">Email:</label><br>
