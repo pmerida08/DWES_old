@@ -157,7 +157,12 @@ h2{
     display: flexbox;
     max-width: 200px;
     min-width: 200px;
-    transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;  
+}
+
+.project > a{
+    color: aliceblue;
+    text-decoration: none;
 }
 
 .project:hover{

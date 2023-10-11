@@ -64,11 +64,12 @@
             <div class="group">
                 <div id="projects">
                     <div class="project">
+                        <a href="../index.html">
                         <img src="img/default_photo.png" alt="default_photo">
-                        <h3>Project #1</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod.</p>
+                        <h3>ACTIVIDADES EVALUABLES</h3>
+                        </a>
                     </div>
-                    <div class="project">
+                    <!-- <div class="project">
                         <img src="img/default_photo.png" alt="default_photo">
                         <h3>Project #2</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod.</p>
@@ -92,7 +93,7 @@
                         <img src="img/default_photo.png" alt="default_photo">
                         <h3>Project #6</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod.</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
