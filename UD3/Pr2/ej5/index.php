@@ -110,7 +110,7 @@ function esFestivo($diaF,$mesF){
                 if ($numDia == $diaActual && $mes == $mesActual && $anioActual == $anio) {
                     echo '<td class="dia today">';
                 } elseif (esFestivo($numDia, $mes)){
-
+                    echo '<td class="dia festivo">';
                 }
                 if ($numDia <= $dias) {
                     echo '<td class="dia">';

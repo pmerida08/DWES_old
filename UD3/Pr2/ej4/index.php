@@ -17,6 +17,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 4</title>
     <style>
+
+        a {
+            color: aliceblue;
+        }
         table{
             min-height: 100vh;
             color:aliceblue;
@@ -36,7 +40,7 @@
         for ($j=0; $j < 256; $j+=$sumRgb) { 
             for ($k=0; $k < 256; $k+=$sumRgb) {
                 $rgb = "rgb($i,$j,$k)";
-                echo "<td style='background-color:$rgb'>$rgb</td>";
+                echo "<td style='background-color:$rgb'><a href='./color.php?color=".$rgb."'>$rgb</a></td>";
             }; 
         };
         echo '<tr>';
