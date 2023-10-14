@@ -12,7 +12,7 @@
 
 
 $meses = array('ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE');
-$mes = 10;
+$mes = 12;
 $anio = 2023;
 $dias = 0;
 
@@ -56,6 +56,8 @@ function esFestivo($diaF,$mesF){
     );
 
     $fecha = sprintf("%02d-%02d", $diaF, $mesF);
+    return in_array($fecha, $festivos);
+
 };
 
 ?>
@@ -98,6 +100,23 @@ function esFestivo($diaF,$mesF){
             color: aliceblue;
             border-radius: 900px;
         }
+        .diaToday{
+            color: black;
+            text-align: center;
+            padding: 20px;
+            font-size: 20px;
+            background-color: greenyellow;
+            border-radius: 900px;
+        }
+
+        .diaFestivo{
+            color: black;
+            text-align: center;
+            padding: 20px;
+            font-size: 20px;
+            background-color: brown;
+            border-radius: 900px;
+        }
     </style>
 </head>
 <body>
@@ -108,19 +127,22 @@ function esFestivo($diaF,$mesF){
             echo '<tr>';
             for ($j = 1; $j <= 7; $j++) {
                 if ($numDia == $diaActual && $mes == $mesActual && $anioActual == $anio) {
-                    echo '<td class="dia today">';
+                    echo '<td class="diaToday">';
+                    printf('%2d', $numDia);
+                    echo '</td>';
                 } elseif (esFestivo($numDia, $mes)){
-                    echo '<td class="dia festivo">';
-                }
-                if ($numDia <= $dias) {
+                    echo '<td class="diaFestivo">';
+                    printf('%2d', $numDia);
+                    echo '</td>';
+                } elseif ($numDia <= $dias) {
                     echo '<td class="dia">';
                     printf('%2d', $numDia);
                     echo '</td>';
-                    
-                    ++$numDia;
+            
                 } else {
                     echo '<td>&nbsp;</td>';
                 }
+                ++$numDia;
             }
             echo '</tr>';
         }
