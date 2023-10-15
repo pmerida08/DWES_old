@@ -110,7 +110,7 @@ function esFestivo($diaF,$mesF){
         }
 
         .diaFestivo{
-            color: black;
+            color: aliceblue;
             text-align: center;
             padding: 20px;
             font-size: 20px;
