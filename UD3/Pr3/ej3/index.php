@@ -10,7 +10,7 @@
 $arrayAlumnos = array('Andrés Rodríguez', 'Pablo Mérida', 'Víctor Fernández', 'Alejandro Priego', 'Ángel Fernández', 'Antonio Carmona', 'Héctor', 'Javier Postigo', 'Quique Ruz', 'Laura', 'Eduardo', 'Adrián Cordovero', 'Daniel Marín', 'Frías', 'Adrian', 'Ángel Cubero', 'Galisteo', 'Sergio Luna');
     
  function select($element){    
-    return $element[rand(0, count($element))];
+    return $element[rand(0, count($element)-1)];
  };
 ?>
 

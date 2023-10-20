@@ -21,7 +21,7 @@
     <ul>
         <?php
         for ($i=0; $i < count($arrayEj); $i++) { 
-            echo "<a href=\"ej.$arrayEj[$i]./index.php\">Ejercicio $arrayEj[$i]</a>";
+            echo "<a href=\"ej$arrayEj[$i]/index.php\">Ejercicio $arrayEj[$i]</a>";
         }
         ?>
     </ul>

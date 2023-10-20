@@ -67,32 +67,18 @@
                     <div class="project">
                         <a href="../index.html">
                         <img src="img/default_photo.png" alt="default_photo">
+                        <h3>ACTIVIDADES DE CLASE</h3>
+                        </a>
+                    </div>
+                    <div class="project">
+                        <a href="../actividadesEvaluables/index.html">
+                        <img src="img/default_photo.png" alt="default_photo">
                         <h3>ACTIVIDADES EVALUABLES</h3>
                         </a>
                     </div>
                     <!-- <div class="project">
                         <img src="img/default_photo.png" alt="default_photo">
                         <h3>Project #2</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod.</p>
-                    </div>
-                    <div class="project">
-                        <img src="img/default_photo.png" alt="default_photo">
-                        <h3>Project #3</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod.</p>
-                    </div>
-                    <div class="project">
-                        <img src="img/default_photo.png" alt="default_photo">
-                        <h3>Project #4</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod.</p>
-                    </div>
-                    <div class="project">
-                        <img src="img/default_photo.png" alt="default_photo">
-                        <h3>Project #5</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod.</p>
-                    </div>
-                    <div class="project">
-                        <img src="img/default_photo.png" alt="default_photo">
-                        <h3>Project #6</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod.</p>
                     </div> -->
                 </div>
