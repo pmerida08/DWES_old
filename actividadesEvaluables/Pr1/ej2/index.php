@@ -1,10 +1,9 @@
 <?php
+
 /**
+ * @author Pablo
  * 
- * @author Pablo Merida Velasco
- *  
- * 2. Crear una aplicación que permita practicar tests de autoescuela.
- * 
+ * Crear una aplicación que permita practicar tests de autoescuela.
  * Criterios de validación:
  * 
  * • Los test se encuentran almacenados en un array asociativo dentro de un
@@ -27,8 +26,48 @@
  * • Procesamiento del formulario mostrando el resultado del test realizado,
  * indicando las respuestas correctas e incorrectas.
  * 
- * • Utilización de emoticonos para marcar el test como SUPERADO o NO SUPERADO.
+ * • Utilización de emoticonos para marcar el test como SUPERADO o NO
+ * SUPERADO.
  */
+
+include("config/tests_cnf.php");
+
+$numTests = count($aTests);
+$tiposDePermiso = array();
+
+foreach ($aTests as $test) {
+    $permiso = $test["Permiso"];
+    if (!in_array($permiso, $tiposDePermiso)) {
+        $tiposDePermiso[] = $permiso;
+    }
+}
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Examenes DGT</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
+<body>
+    <h1>Carnets Disponibles</h1>
+    <form action="buscarExamen.php" method="post">
+        Elige un tipo de permiso:
+        <select id="opcion" name="permiso">
+            <?php
+                foreach ($tiposDePermiso as $clave => $permiso) {
+                    $letraPermiso = explode(' ', $permiso);
+                    $letraPermiso = end($letraPermiso);
+                    echo "<option value='$letraPermiso'>$permiso</option>";
+                }
+            ?>
+        </select>
+        <input type="submit" value="Buscar Examenes" name="submit">
+    </form>
+
+</body>
+
+</html>

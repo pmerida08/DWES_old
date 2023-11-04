@@ -8,6 +8,7 @@
  */
 
 $meses = array('ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE');
+$arrayDia = array('L', 'M', 'X', 'J', 'V', 'S', 'D');
 
 if (isset($_POST['mes'])) {
     $mes = $_POST['mes'];
@@ -95,14 +96,14 @@ function esFestivo($diaF, $mesF){
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 50vh;
+            /* min-height: 40vh; */
         }
 
         .mes {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 10%;
+            margin-top: 5%;
         }
 
         tbody {
@@ -116,7 +117,13 @@ function esFestivo($diaF, $mesF){
             transition: 0.3s ease-in-out;
             text-align: center;
         }
-
+        
+        .diaLetra {
+            padding: 20px;
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 3px solid black; 
+        }
         .dia:hover {
             background-color: black;
             color: aliceblue;
@@ -170,8 +177,12 @@ function esFestivo($diaF, $mesF){
 <body>
     <table>
 
-        <h1 class="mes"><?php echo $meses[$mes - 1]; ?></h1>
+        <h1 class="mes"><?php echo $meses[$mes - 1]; ?> - <?php echo $anio?></h1>
         <?php
+        echo '<tr>';
+        foreach ($arrayDia as $d) {
+            echo "<td class='diaLetra'>$d</td>";
+        }
         $numDia = 1;
         for ($i = 1; $i <= 5; $i++) {
             echo '<tr>';
@@ -199,9 +210,20 @@ function esFestivo($diaF, $mesF){
         
     </table>
     <form method="post" class="formMes">
-            <label>Mes: </label>
-            <input type="number" name="mes" id="mes">
-            <button type="submit" name="enviar">Enviar</button>
-        </form>
+        <label>Mes: </label>
+        <select name="mes" id="mes">
+            <?php 
+                $selected = "";
+                $counter = 1;
+                foreach ($meses as $key) {
+                    echo '<option value="'.$counter.'">'.$key.'</option>';
+                    $counter++;
+                }
+            ?>
+        </select>
+        <label>Año: </label><br>
+        <input type="number" name="anio" id="anio">
+        <button type="submit" name="enviar">Enviar</button>
+    </form>
 </body>
 </html>
