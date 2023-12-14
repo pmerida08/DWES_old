@@ -24,7 +24,7 @@
             echo "<input type='text' name='$value' placeholder='$value'. ':' value=''";
             echo "<br><br>";
         }
-    ?>
+    ?>  
         <input type="submit" name="Enviar">
     </form>
 </body>
