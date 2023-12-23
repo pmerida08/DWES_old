@@ -8,14 +8,21 @@
  * 
  */
 
-if (isset($_POST['mes'])) {
+include('config/config.php');
+
+if (isset($_POST['mes']) && isset($_POST['anio'])) {
     $mes = $_POST['mes'];
+    $anio = $_POST['anio'];
 } else {
-    $mes = date('n');
+
+    $mes = date('m');
+    $anio = date('Y');
 }
 
-$anio = 2023;
-$dias = 0;
+$diaActual = date("d");
+$mesActual = date("m");
+$anioActual = date("Y");
+
 
 switch ($mes) {
     case 1:
@@ -44,9 +51,6 @@ switch ($mes) {
         break;
 }
 
-$diaActual = date("d");
-$mesActual = date("m");
-$anioActual = date("Y");
 
 function esFestivo($diaF, $mesF)
 {
@@ -91,96 +95,39 @@ function esFestivo($diaF, $mesF)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario Mensual</title>
-    <style>
-        table {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 50vh;
-        }
-
-        .mes {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10%;
-        }
-
-        tbody {
-            border: 10px solid black;
-            border-radius: 15px;
-        }
-
-        .dia {
-            padding: 20px;
-            font-size: 20px;
-            transition: 0.3s ease-in-out;
-            text-align: center;
-        }
-
-        .dia:hover {
-            background-color: black;
-            color: aliceblue;
-            border-radius: 900px;
-        }
-
-        .diaToday {
-            color: black;
-            text-align: center;
-            padding: 20px;
-            font-size: 20px;
-            background-color: greenyellow;
-            border-radius: 900px;
-        }
-
-        .diaFestivoNacional {
-            color: black;
-            text-align: center;
-            padding: 20px;
-            font-size: 20px;
-            background-color: rgba(255, 0, 0, 0.6);
-            border-radius: 900px;
-        }
-
-        .diaFestivoComAutonoma {
-            color: black;
-            text-align: center;
-            padding: 20px;
-            font-size: 20px;
-            background-color: rgba(255, 255, 0, 0.6);
-            border-radius: 900px;
-        }
-
-        .diaFestivoLocal {
-            color: black;
-            text-align: center;
-            padding: 20px;
-            font-size: 20px;
-            background-color: rgba(0, 0, 255, 0.6);
-            border-radius: 900px;
-        }
-
-        .formMes {
-            margin: 30px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <table>
 
-        <h1 class="mes"><?php echo $meses[$mes - 1]; ?></h1>
+    <h1 class="mes"><?php echo $meses[$mes - 1] . " - " . $anio ?></h1>
+    <table>
+        <tr>
+            <th>L</th>
+            <th>M</th>
+            <th>X</th>
+            <th>J</th>
+            <th>V</th>
+            <th>S</th>
+            <th>D</th>
+        </tr>
+
         <?php
         $numDia = 1;
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 6; $i++) {
             echo '<tr>';
+            $fecha = mktime(0, 0, 0, $mes, $numDia, $anio);
+            $diaSemana = date('N', $fecha);
+
             for ($j = 1; $j <= 7; $j++) {
+                if ($numDia == 1) {
+
+                    for ($j = 1; $j < $diaSemana; $j++) {
+                        echo '<td>&nbsp;</td>';
+                    }
+                }
                 $festivoTipo = esFestivo($numDia, $mes);
                 if ($festivoTipo == 'festivoNacional') {
-                    // echo $diasSemana[calcularDiaSemana($numDia,$mes, $anio)];
                     echo "<td class='diaFestivoNacional'>$numDia</td>";
                 } elseif ($festivoTipo == 'festivoComAutonoma') {
                     echo "<td class='diaFestivoComAutonoma'>$numDia</td>";
@@ -201,10 +148,25 @@ function esFestivo($diaF, $mesF)
 
     </table>
     <form method="post" class="formMes">
-        <label>Mes: </label>
-        <input type="number" name="mes" id="mes">
+        <label>Mes:
+            <input type="number" name="mes" id="mes" value=<?php echo $mes ?>>
+        </label>
+        <label>Año:
+            <input type="number" name="anio" id="anio" value=<?php echo $anio ?>>
+        </label>
         <button type="submit" name="enviar">Enviar</button>
     </form>
+
+    <footer>
+        <legend>
+            <ul>
+                <li>Día actual</li>
+                <li>Festivo Nacional</li>
+                <li>Festivo Comunidad Aut.</li>
+                <li>Festivo Local</li>
+            </ul>
+        </legend>
+    </footer>
 </body>
 
 </html>

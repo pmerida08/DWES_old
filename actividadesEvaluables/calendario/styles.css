@@ -1,0 +1,110 @@
+table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+}
+
+.mes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+tbody {
+  border: 10px solid black;
+  border-radius: 15px;
+}
+
+.dia {
+  padding: 20px;
+  font-size: 20px;
+  transition: 0.3s ease-in-out;
+  text-align: center;
+}
+
+.dia:hover {
+  background-color: black;
+  color: aliceblue;
+  border-radius: 900px;
+}
+
+.diaToday {
+  color: black;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  background-color: greenyellow;
+  border-radius: 900px;
+}
+
+.diaFestivoNacional {
+  color: black;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  background-color: rgba(255, 0, 0, 0.6);
+  border-radius: 900px;
+}
+
+.diaFestivoComAutonoma {
+  color: black;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  background-color: rgba(255, 255, 0, 0.6);
+  border-radius: 900px;
+}
+
+.diaFestivoLocal {
+  color: black;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  background-color: rgba(0, 0, 255, 0.6);
+  border-radius: 900px;
+}
+
+.formMes {
+  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formMes label{
+    margin-right: 10px;
+}
+
+legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    padding: 0;
+}
+
+legend ul {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+legend ul li:nth-child(1) {
+  background-color: greenyellow;
+}
+
+legend ul li:nth-child(2) {
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
+legend ul li:nth-child(3) {
+  background-color: rgba(255, 255, 0, 0.6);
+}
+
+legend ul li:nth-child(4) {
+  background-color: rgba(0, 0, 255, 0.6);
+}
