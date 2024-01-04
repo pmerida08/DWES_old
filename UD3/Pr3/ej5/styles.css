@@ -45,7 +45,7 @@ tbody {
   border-radius: 900px;
 }
 
-.diaToday, .diaFestivoNacional, .diaFestivoComAutonoma, .diaFestivoLocal, .diaTarea{
+.diaToday, .diaFestivoNacional, .diaFestivoComAutonoma, .diaFestivoLocal {
   color: black;
   text-align: center;
   padding: 20px;

@@ -101,6 +101,28 @@ if (isset($_POST['cambiarCol'])) {
     $_SESSION['colorLocal'] = $colorLocal;
 }
 
+function readTareas()
+{
+    global $archivoTareas;
+    $tareas = fopen($archivoTareas, "r") or die("No se ha podido abrir el archivo");
+
+    $tareasArray = array();
+
+    while (!feof($tareas)) {
+        $linea = fgets($tareas);
+        $linea = explode(" - ", $linea);
+        $tareaDia = date("d", strtotime($linea[0]));
+        $tareaMes = date("m", strtotime($linea[0]));
+        $tareaAnio = date("Y", strtotime($linea[0]));
+
+        $tareasArray[] = array('dia' => $tareaDia, 'mes' => $tareaMes, 'anio' => $tareaAnio);
+    }
+
+    fclose($tareas);
+
+    return $tareasArray;
+}
+
 if (isset($_POST['agregarTarea'])) {
     $dia = $_POST['dia'];
     $tarea = $_POST['tarea'];
@@ -151,6 +173,10 @@ $fechaActual = date("d-m-Y");
             background-color: var(--colorDiaLocal);
         }
 
+        .diaTarea {
+            text-decoration: underline;
+        }
+
         legend ul li:nth-child(1) {
             background-color: var(--colorDiaAct);
         }
@@ -187,6 +213,7 @@ $fechaActual = date("d-m-Y");
 
                 <?php
                 $numDia = 1;
+                $tareasLeer = readTareas();
                 for ($i = 1; $i <= 6; $i++) {
                     echo '<tr>';
                     $fecha = mktime(0, 0, 0, $mes, $numDia, $anio); // Se hace esto para averiguar el día de la semana
@@ -198,6 +225,13 @@ $fechaActual = date("d-m-Y");
                                 echo '<td>&nbsp;</td>';
                             }
                         }
+                        $hasTarea = false;
+                        foreach ($tareasLeer as $tarea) {
+                            if ($numDia == $tarea['dia'] && $mes == $tarea['mes'] && $anio == $tarea['anio']) {
+                                $hasTarea = true;
+                                break;
+                            }
+                        }
                         $festivoTipo = esFestivo($numDia, $mes);
                         if ($festivoTipo == 'festivoNacional') {
                             echo "<td class='diaFestivoNacional'>$numDia</td>";
@@ -207,7 +241,9 @@ $fechaActual = date("d-m-Y");
                             echo "<td class='diaFestivoLocal'>$numDia</td>";
                         } elseif ($numDia == $diaActual && $mes == $mesActual && $anioActual == $anio) {
                             echo "<td class='diaToday'>$numDia</td>";
-                        } elseif ($numDia <= $dias) {
+                        } elseif ($hasTarea) {
+                            echo "<td class='diaTarea'>$numDia</td>";            
+                        } elseif ($numDia <= $dias){
                             echo "<td class='dia'>$numDia</td>";
                         } else {
                             echo '<td>&nbsp;</td>';
@@ -289,6 +325,7 @@ $fechaActual = date("d-m-Y");
                 <label>Tarea:
                     <input type="text" name="tarea" id="tarea">
                 </label>
+                <br><br>
                 <button type="submit" name="agregarTarea">Agregar</button>
             </form>
         </div>
@@ -298,4 +335,4 @@ $fechaActual = date("d-m-Y");
 
 </html>
 
-<?php session_destroy()?>
+<?php session_destroy() ?>
