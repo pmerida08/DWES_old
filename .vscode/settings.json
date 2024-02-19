@@ -1,3 +1,5 @@
 {
-    "php.version": "8.3"
+    "php.version": "8.3",
+    "open-php-html-js-in-browser.selectedBrowser": "Chrome",
+    "open-php-html-js-in-browser.urlToOpen": "http://localhost/"
 }
