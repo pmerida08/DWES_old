@@ -67,14 +67,18 @@ require_once 'config.php';
                 } else {
                     foreach ($value['Opciones'] as $opcion) {
                         if (isset($_POST['submit'])) {
-
+                            if ($opcion == $value['Respuesta']) {
+                                echo "<div class='correcto'>";
+                            } else {
+                                echo "<div>";
+                            }
+                            
                             // ¿Por qué se queda con la última respuesta?
-                            if ($opcion == $_POST["respuesta$key"]) {
-                                echo "<div class='" . ($_POST["respuesta$key"] == $value['Respuesta'] ? 'correcto' : '') . "'>";
+                            if ($opcion == $_POST["respuesta$key"]) { 
                                 echo "<input type='checkbox' checked name='respuesta$key' value='$opcion'>$opcion" . 
                                 "</div>";
                             } else {
-                                echo "<input type='checkbox' name='respuesta$key' value='$opcion'>$opcion" . "<br>";
+                                echo "<input type='checkbox' name='respuesta$key' value='$opcion'>$opcion" . "</div>";
                             }
                         } else {
                             echo "<input type='checkbox' name='respuesta$key' value='$opcion'>$opcion" . "<br>";
