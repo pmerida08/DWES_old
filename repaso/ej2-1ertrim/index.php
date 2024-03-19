@@ -1,8 +1,5 @@
 <?php
-
 require_once 'config.php';
-
-
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +39,6 @@ require_once 'config.php';
             echo "<br>Idiomas seleccionados: ";
             foreach ($idiomas as $num => $value) {
                 if (isset($_POST["idioma$num"])) {
-
                     echo $_POST["idioma$num"] . " ";
                 }
             }
@@ -51,11 +47,12 @@ require_once 'config.php';
             <br>
             <h2>Contesta las siguientes preguntas:</h2>
             <?php
+            $respuestas_correctas = [];
+
             foreach ($cuestionario as $key => $value) {
                 echo "<p>" . $value['pregunta'] . "</p>";
                 if ($value['Tipo'] == "text") {
                     if (isset($_POST['submit'])) {
-
                         if (in_array($_POST["respuesta$key"], $value['Respuesta'])) {
                             echo "<input type='text' class='correcto' name='respuesta$key' value='" . ($_POST["respuesta$key"] ? $_POST["respuesta$key"] : "") . "'>";
                         } else {
@@ -67,21 +64,24 @@ require_once 'config.php';
                 } else {
                     foreach ($value['Opciones'] as $opcion) {
                         if (isset($_POST['submit'])) {
+
                             if ($opcion == $value['Respuesta']) {
                                 echo "<div class='correcto'>";
                             } else {
                                 echo "<div>";
                             }
-                            
-                            // ¿Por qué se queda con la última respuesta?
-                            if ($opcion == $_POST["respuesta$key"]) { 
-                                echo "<input type='checkbox' checked name='respuesta$key' value='$opcion'>$opcion" . 
-                                "</div>";
+
+                            if (in_array($opcion, $respuestas_correctas)) {
+                                echo "<input type='radio' name='respuesta$key' value='$opcion' " . ($opcion == $_POST["respuesta$key"] ? 'checked' : '') . ">$opcion" .
+                                    "</div>";
                             } else {
-                                echo "<input type='checkbox' name='respuesta$key' value='$opcion'>$opcion" . "</div>";
+                                echo "<input type='radio' name='respuesta$key' value='$opcion'>$opcion" . "</div>";
                             }
                         } else {
-                            echo "<input type='checkbox' name='respuesta$key' value='$opcion'>$opcion" . "<br>";
+                            echo "<input type='radio' name='respuesta$key' value='$opcion'>$opcion" . "<br>";
+                            if ($opcion == $value['Respuesta']) {
+                                $respuestas_correctas[] = $opcion;
+                            }
                         }
                     }
                 }
@@ -93,21 +93,18 @@ require_once 'config.php';
 
     <?php
     if (isset($_POST['submit'])) {
-
-        $post = $_POST;
-
         $aciertos = 0;
         $fallos = 0;
 
         foreach ($cuestionario as $key => $value) {
             if ($value['Tipo'] == "text") {
-                if (in_array($post["respuesta$key"], $value['Respuesta'])) {
+                if (in_array($_POST["respuesta$key"], $value['Respuesta'])) {
                     $aciertos += $value['Acierto'];
                 } else {
                     $fallos += $value['Fallo'];
                 }
             } else {
-                if ($post["respuesta$key"] == $value['Respuesta']) {
+                if ($_POST["respuesta$key"] == $value['Respuesta']) {
                     $aciertos += $value['Acierto'];
                 } else {
                     $fallos += $value['Fallo'];
@@ -116,8 +113,8 @@ require_once 'config.php';
             echo "</ul>";
         }
 
-        $puntuacion = $aciertos + $fallos;
-        echo "<br><h2>Puntuación: " . $puntuacion . "/5</h2>";
+        $puntuacion = $aciertos + $fallos * 0.75;
+        echo "<br><h2>Puntuación: " . $puntuacion . "/7</h2>";
     }
     ?>
 </body>
