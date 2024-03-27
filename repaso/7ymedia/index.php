@@ -113,7 +113,9 @@ switch ($opc) {
     <h2>Número de victorias <?= $_COOKIE['victoriasJugador'] ?></h2>
 
     <a href="?opc=1">Reiniciar partida</a> |
-    <a href="?opc=2">Pedir carta</a> |
+    <?php if ($opc != 3) : ?>
+        <a href="?opc=2">Pedir carta</a> |
+    <?php endif; ?>
     <a href="?opc=3">Plantar</a> |
     <a href="?opc=4">Reiniciar contador victorias</a>
 
