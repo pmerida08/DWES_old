@@ -129,13 +129,19 @@ switch ($opc) {
         ?>
     </div>
 
-    <h2>Maquina <?= $_SESSION['maquina'] ?></h2>
+    <h2>Maquina <!--<?= $_SESSION['maquina'] ?>--></h2>
     <div class="baraja">
         <?php
         $arrayCardsMaquina = $_SESSION['arrayCardsMaquina'];
+
         foreach ($arrayCardsMaquina as $carta) {
-            echo "<img src='img/$carta.jpg' alt='$carta'>";
+            if ($opc == 3) {
+                echo "<img src='img/$carta.jpg' alt='$carta'>";
+            } else {
+                echo "<img src='img/reverso.jpg' alt='reverso'>";
+            }
         }
+
         ?>
     </div>
 
