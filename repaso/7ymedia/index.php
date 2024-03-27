@@ -23,11 +23,15 @@ if (!isset($_SESSION['maquina'])) {
 }
 
 if (!isset($_COOKIE['victoriasJugador'])) {
-    $_COOKIE['victoriasJugador'] = 0;
+    setcookie('victoriasJugador', 0, time() + 3600);
 }
 
-$arrayCardsJugador = [];
-$arrayCardsMaquina = [];
+if (!isset($_SESSION['arrayCardsJugador'])) {
+    $_SESSION['arrayCardsJugador'] = [];
+}
+if (!isset($_SESSION['arrayCardsMaquina'])) {
+    $_SESSION['arrayCardsMaquina'] = [];
+}
 
 $opc = $_GET['opc'] ?? 0;
 
@@ -45,15 +49,13 @@ function calcularPuntuacion($carta)
 function jugar($jugador)
 {
 
-    global $arrayCardsJugador, $arrayCardsMaquina;
-
     $carta = pedirCarta();
     $_SESSION[$jugador] += calcularPuntuacion($carta);
 
     if ($jugador == 'jugador') {
-        $arrayCardsJugador[] = $carta;
+        array_push($_SESSION['arrayCardsJugador'], $carta);
     } else {
-        $arrayCardsMaquina[] = $carta;
+        array_push($_SESSION['arrayCardsMaquina'], $carta);
     }
 
     $_SESSION['baraja'] = array_values($_SESSION['baraja']);
@@ -65,7 +67,8 @@ function comprobarGanador()
         echo "<h2>Has perdido</h2>";
     } elseif ($_SESSION['jugador'] > $_SESSION['maquina'] || $_SESSION['maquina'] > 7.5) {
         echo "<h2>Has ganado</h2>";
-        $_COOKIE['victoriasJugador']++;
+        $victoriasActuales = $_COOKIE['victoriasJugador'];
+        setcookie('victoriasJugador', ++$victoriasActuales, time() + 3600);
     } else {
         echo "<h2>Empate</h2>";
     }
@@ -76,6 +79,8 @@ switch ($opc) {
         $_SESSION['baraja'] = $barajaOriginal; // Reiniciar baraja
         $_SESSION['jugador'] = 0;
         $_SESSION['maquina'] = 0;
+        $_SESSION['arrayCardsJugador'] = [];
+        $_SESSION['arrayCardsMaquina'] = [];
         break;
     case '2':
         jugar('jugador');
@@ -86,6 +91,7 @@ switch ($opc) {
         break;
     case '4':
         session_destroy();
+        setcookie('victoriasJugador', 0, time() + 3600);
         break;
     default:
         break;
@@ -114,6 +120,7 @@ switch ($opc) {
     <h2>Jugador <?= $_SESSION['jugador'] ?></h2>
     <div class="baraja">
         <?php
+        $arrayCardsJugador = $_SESSION['arrayCardsJugador'];
         foreach ($arrayCardsJugador as $carta) {
             echo "<img src='img/$carta.jpg' alt='$carta'>";
         }
@@ -123,6 +130,7 @@ switch ($opc) {
     <h2>Maquina <?= $_SESSION['maquina'] ?></h2>
     <div class="baraja">
         <?php
+        $arrayCardsMaquina = $_SESSION['arrayCardsMaquina'];
         foreach ($arrayCardsMaquina as $carta) {
             echo "<img src='img/$carta.jpg' alt='$carta'>";
         }
