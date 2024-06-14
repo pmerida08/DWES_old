@@ -1,0 +1,14 @@
+h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+body {
+  margin: 0;
+}
+
+a[href="/reservas/add"] {
+  bottom: 20px;
+  right: 20px;
+  position: fixed;
+}

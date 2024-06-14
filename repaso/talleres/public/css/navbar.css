@@ -1,0 +1,14 @@
+.nav-item {
+    display: inline-block;
+    width: 250px;
+    text-align: center;
+}
+
+nav img {
+    width: max-content;
+    margin: 0 10px;
+}
+
+nav .container-fluid {
+    margin: 0 50px;
+} 

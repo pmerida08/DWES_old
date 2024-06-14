@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+table {
+    margin: 10px;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a[href="/profesores/add"] {
+    bottom: 20px;
+    right: 20px;
+    position: fixed;
+}
+  

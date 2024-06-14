@@ -1,0 +1,44 @@
+h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.aulas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.card {
+  width: 18rem;
+}
+
+.card-body .btn {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.aula {
+  text-decoration: none;
+  color: black;
+  transition: 0.3s ease-in-out;
+}
+
+.aula:hover {
+  scale: 1.1;
+}
+
+a[href="/aulas/add"] {
+  bottom: 20px;
+  right: 20px;
+  position: fixed;
+}

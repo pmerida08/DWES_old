@@ -81,6 +81,7 @@ switch ($opc) {
         $_SESSION['maquina'] = 0;
         $_SESSION['arrayCardsJugador'] = [];
         $_SESSION['arrayCardsMaquina'] = [];
+        session_destroy();
         break;
     case '2':
         jugar('jugador');
@@ -90,7 +91,6 @@ switch ($opc) {
         comprobarGanador();
         break;
     case '4':
-        session_destroy();
         setcookie('victoriasJugador', 0, time() + 3600);
         break;
     default:
