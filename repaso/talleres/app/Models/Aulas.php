@@ -10,7 +10,7 @@ class Aulas extends DBAbstractModel
     private $id;
     private $codigo;
     private $t_agrupamiento_grupos_id;
-    // private $descripcion;
+    private $descripcion;
     private $numero_mesas;
 
     private static $instancia;
@@ -84,10 +84,15 @@ class Aulas extends DBAbstractModel
         $this->numero_mesas = $numero_mesas;
     }
 
-    // public function getDescripcion()
-    // {
-    //     return $this->descripcion;
-    // }
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+    
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    }
 
 
 
@@ -102,19 +107,21 @@ class Aulas extends DBAbstractModel
 
     public function set()
     {
-        $this->query = "INSERT INTO aulas (codigo, t_agrupamiento_grupos_id, numero_mesas) VALUES (:codigo,:t_agrupamiento_grupos_id,:numero_mesas)";
+        $this->query = "INSERT INTO aulas (codigo, t_agrupamiento_grupos_id, numero_mesas, descripcion) VALUES (:codigo,:t_agrupamiento_grupos_id,:numero_mesas, :descripcion)";
         $this->params['codigo'] = $this->codigo;
         $this->params['t_agrupamiento_grupos_id'] = $this->t_agrupamiento_grupos_id;
         $this->params['numero_mesas'] = $this->numero_mesas;
+        $this->params['descripcion'] = $this->descripcion;
         $this->getResultsFromQuery();
         $this->mensaje = "Aula añadida";
     }
     public function edit()
     {
-        $this->query = "UPDATE aulas SET codigo=:codigo, t_agrupamiento_grupos_id=:t_agrupamiento_grupos_id, numero_mesas=:numero_mesas WHERE id=:id";
+        $this->query = "UPDATE aulas SET codigo=:codigo, t_agrupamiento_grupos_id=:t_agrupamiento_grupos_id, numero_mesas=:numero_mesas, descripcion=:descripcion WHERE id=:id";
         $this->params['codigo'] = $this->codigo;
         $this->params['t_agrupamiento_grupos_id'] = $this->t_agrupamiento_grupos_id;
         $this->params['numero_mesas'] = $this->numero_mesas;
+        $this->params['descripcion'] = $this->descripcion;
         $this->params['id'] = $this->id;
         $this->getResultsFromQuery();
         $this->mensaje = "Aula editada";

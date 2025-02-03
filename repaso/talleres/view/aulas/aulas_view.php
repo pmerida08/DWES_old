@@ -47,14 +47,14 @@ $aulas_id = $data['id'];
     </nav>
 
 
-    <h1>Aula <?= $data['aula_codigo'] ?></h1>
+    <h1>Aula <?= $data['aula_codigo'] ?> - <?= $data['descripcion'] ?></h1>
 
-    <article>
+    <article class="reverse">
 
         <?php
 
-        for ($i = $data['numero_mesas'] * 2; $i >= 1; $i--) {
-            if ($i % 2 == 0) {
+        for ($i = 1; $i <= $data['numero_mesas'] * 2; $i++) {
+            if ($i % 2 == 1 || $i == 1) {
                 echo '<div class="row">';
             }
         ?>
@@ -111,7 +111,7 @@ $aulas_id = $data['id'];
                 </div>
             </div>
         <?php
-            if ($i % 2 == 1 || $i == 1) {
+            if ($i % 2 == 0 ) {
                 echo '</div>';
             }
         }
@@ -230,7 +230,18 @@ $aulas_id = $data['id'];
         </tbody>
     </table>
 
-
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <p class="mb-0">&copy; <?php echo "IES GRAN CAPITÁN " . date("Y"); ?> | Avda Arcos de la Frontera s/n, Córdoba (Spain) | Tel: 957379710</p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/iesgrancapitan" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/iesgrancapitan" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/iesgrancapitan/" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

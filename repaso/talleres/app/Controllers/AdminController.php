@@ -30,13 +30,6 @@ class AdminController extends BaseController
                 $_SESSION['error'] = 'Usuario o contraseña incorrectos';
                 header('Location: /login');
             }
-        } else if (isset($_GET['code'])) {
-            $token = CLIENT->fetchAccessTokenWithAuthCode($_GET['code']);
-            CLIENT->setAccessToken($token['access_token']);
-            $google_oauth = new Google_Service_Oauth2(CLIENT);
-            $google_account_info = $google_oauth->userinfo->get();
-            $email = $google_account_info->email;
-            
         }
         $this->renderHTML('../view/login_view.php');
     }

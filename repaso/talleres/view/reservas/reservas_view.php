@@ -48,74 +48,89 @@
         $equipos = $data['equipos'];
         $aulas = $data['aulas'];
         ?>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Fecha inicio</th>
-                    <th>Fecha final</th>
-                    <th>Equipo reservado</th>
-                    <th>Profesor reserva</th>
-                    <th>Creado a las: </th>
-                    <th>Modificado a las:</th>
-                    <th>Descripcion</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($data['reservas'] as $reserva) : ?>
+        <section>
+            <article class="container">
+                <a href="/reservas/add" class="btn" id="add_btn">Añadir</a>
+            </article>
+
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><?= $reserva['fecha_inicio'] ?></td>
-                        <td><?= $reserva['fecha_final'] ?></td>
-
-                        <?php
-                        $equipo_imprimido = false;
-                        foreach ($equipos as $equipo) :
-                            if ($reserva['equipos_id'] == $equipo['id']) :
-                                $equipo_imprimido = true;
-                        ?>
-                                <td><?= $equipo['codigo'] ?></td>
-                            <?php
-                                break;
-                            endif;
-                        endforeach;
-                        if (!$equipo_imprimido) :
-                            ?>
-                            <td>No asignado</td>
-                        <?php endif; ?>
-
-                        <?php
-                        $profesor_imprimido = false;
-                        foreach ($profesores as $profesor) :
-                            if ($reserva['profesores_id'] == $profesor['id']) :
-                                $profesor_imprimido = true;
-                        ?>
-                                <td><?= $profesor['nombre'] ?></td>
-                            <?php
-                                break;
-                            endif;
-                        endforeach;
-                        if (!$profesor_imprimido) :
-                            ?>
-                            <td>No asignado</td>
-                        <?php endif; ?>
-
-                        <td><?= $reserva['created_at'] ?></td>
-                        <td><?= $reserva['updated_at'] ?></td>
-                        <td><?= $reserva['descripcion'] ?></td>
-                        <td>
-                            <a href="/reservas/edit/<?= $reserva['id'] ?>" class="btn btn-primary">Editar</a>
-                            <a href="/reservas/delete/<?= $reserva['id'] ?>" class="btn btn-danger">Eliminar</a>
-                        </td>
+                        <th>Fecha inicio</th>
+                        <th>Fecha final</th>
+                        <th>Equipo reservado</th>
+                        <th>Profesor reserva</th>
+                        <th>Creado a las: </th>
+                        <th>Modificado a las:</th>
+                        <th>Descripcion</th>
+                        <th>Acciones</th>
                     </tr>
-                <?php endforeach; ?>
+                </thead>
+                <tbody>
+                    <?php foreach ($data['reservas'] as $reserva) : ?>
+                        <tr>
+                            <td><?= $reserva['fecha_inicio'] ?></td>
+                            <td><?= $reserva['fecha_final'] ?></td>
 
-            </tbody>
-        </table>
-        <a href="/reservas/add" class="btn btn-primary" id="add_btn"><i class="fa-solid fa-plus"></i></a>
+                            <?php
+                            $equipo_imprimido = false;
+                            foreach ($equipos as $equipo) :
+                                if ($reserva['equipos_id'] == $equipo['id']) :
+                                    $equipo_imprimido = true;
+                            ?>
+                                    <td><?= $equipo['codigo'] ?></td>
+                                <?php
+                                    break;
+                                endif;
+                            endforeach;
+                            if (!$equipo_imprimido) :
+                                ?>
+                                <td>No asignado</td>
+                            <?php endif; ?>
 
+                            <?php
+                            $profesor_imprimido = false;
+                            foreach ($profesores as $profesor) :
+                                if ($reserva['profesores_id'] == $profesor['id']) :
+                                    $profesor_imprimido = true;
+                            ?>
+                                    <td><?= $profesor['nombre'] ?></td>
+                                <?php
+                                    break;
+                                endif;
+                            endforeach;
+                            if (!$profesor_imprimido) :
+                                ?>
+                                <td>No asignado</td>
+                            <?php endif; ?>
+
+                            <td><?= $reserva['created_at'] ?></td>
+                            <td><?= $reserva['updated_at'] ?></td>
+                            <td><?= $reserva['descripcion'] ?></td>
+                            <td>
+                                <a href="/reservas/edit/<?= $reserva['id'] ?>" class="btn btn-primary">Editar</a>
+                                <a href="/reservas/delete/<?= $reserva['id'] ?>" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+
+                </tbody>
+            </table>
+        </section>
 
     </main>
-
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <p class="mb-0">&copy; <?php echo "IES GRAN CAPITÁN " . date("Y"); ?> | Avda Arcos de la Frontera s/n, Córdoba (Spain) | Tel: 957379710</p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/iesgrancapitan" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/iesgrancapitan" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/iesgrancapitan/" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

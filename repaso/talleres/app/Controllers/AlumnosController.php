@@ -62,4 +62,46 @@ class AlumnosController extends BaseController
         $alumno->delete($numero);
         header('Location: /gestor/alumnos');
     }
+
+    public function ImportAction($csv_file)
+    {
+        $alumnos = Alumnos::getInstancia();
+
+        $csv_file = $_FILES['csv_file']['tmp_name'];
+        $handle = fopen($csv_file, "r");
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $alumnos->setNombre($data[0]);
+            $alumnos->setEmail($data[1]);
+            $alumnos->setPassword($data[2]);
+            $alumnos->setActivo($data[3]);
+            $alumnos->set();
+        }
+        fclose($handle);
+        header('Location: /gestor/alumnos');
+    }
+
+    public function ExportAction()
+    {
+        $alumnos = Alumnos::getInstancia();
+        $data = $alumnos->getAll();
+
+        $filename = 'alumnos.csv';
+
+
+        if (($handle = fopen($filename, "w")) !== FALSE) {
+            fputcsv($handle, array('Nombre', 'Email', 'Password', 'Activo'));
+            foreach ($data as $alumno) {
+                fputcsv($handle, array($alumno['nombre'], $alumno['email'], $alumno['password'], $alumno['activo'] == 1 ? 'Activo' : 'Inactivo'));
+            }
+            fclose($handle);
+
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            header('Content-Length: ' . filesize($filename));
+            readfile($filename);
+            // header('Location: /gestor/alumnos');
+        } else {
+            echo 'Error al exportar';
+        }
+    }
 }

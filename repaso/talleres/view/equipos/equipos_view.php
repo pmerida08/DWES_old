@@ -43,36 +43,52 @@
                 ?>
             </ul>
         </section>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Descripción</th>
-                    <th>Referencia Junta de Andalucía</th>
-                    <th>Imagen</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($data as $equipo) : ?>
+        <section>
+            <article class="container">
+                <a href="/equipos/add" class="btn" id="add_btn">Añadir</a>
+            </article>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><?= $equipo['codigo'] ?></td>
-                        <td><?= $equipo['descripcion'] ?></td>
-                        <td><?= $equipo['referencia_JA'] ?></td>
-                        <td><?= $equipo['imagen'] ?></td>
-                        <td><?= $equipo['t_estados_id'] == 1 ? 'Operativo' : 'Roto' ?></td>
-                        <td>
-                            <a href="/equipos/edit/<?= $equipo['id'] ?>" class="btn btn-primary">Editar</a>
-                            <a href="/equipos/delete/<?= $equipo['id'] ?>" class="btn btn-danger">Eliminar</a>
-                        </td>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Referencia Junta de Andalucía</th>
+                        <th>Imagen</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <a href="/equipos/add" class="btn btn-primary" id="add_btn"><i class="fa-solid fa-plus"></i></a>
+                </thead>
+                <tbody>
+                    <?php foreach ($data as $equipo) : ?>
+                        <tr>
+                            <td><?= $equipo['codigo'] ?></td>
+                            <td><?= $equipo['descripcion'] ?></td>
+                            <td><?= $equipo['referencia_JA'] ?></td>
+                            <td><?php echo $equipo['imagen'] ? '<img src="' . $equipo['imagen'] . '" alt="' . $equipo['codigo'] . '">' : 'Sin foto' ?></td>
+                            <td><?= $equipo['t_estados_id'] == 1 ? 'Operativo' : 'Roto' ?></td>
+                            <td>
+                                <a href="/equipos/edit/<?= $equipo['id'] ?>" class="btn btn-primary">Editar</a>
+                                <a href="/equipos/delete/<?= $equipo['id'] ?>" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
 
     </main>
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <p class="mb-0">&copy; <?php echo "IES GRAN CAPITÁN " . date("Y"); ?> | Avda Arcos de la Frontera s/n, Córdoba (Spain) | Tel: 957379710</p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/iesgrancapitan" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/iesgrancapitan" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/iesgrancapitan/" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

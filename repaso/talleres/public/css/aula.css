@@ -7,20 +7,25 @@ h1 {
 }
 
 article {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px;
+  display: grid;
+  width: min-content;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  margin: 20px auto;
+}
+.reverse, .reverse > * {
+  transform: rotate(180deg);
 }
 
 table {
   margin: 200px auto;
 }
 
-.row {
+article .row {
   display: flex;
   justify-content: center;
+  flex-direction: row-reverse;
+  width: 400px;
   margin-bottom: 20px;
   background-color: #ccc;
   margin: 5px;
@@ -37,9 +42,9 @@ table {
 }
 
 .card {
-  width: 200px;
-  margin: 10px;
-  padding: 10px;
+  width: 180px;
+  margin: 5px;
+  padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -48,4 +53,24 @@ table {
 input[type="submit"] {
   display: block;
   margin: 15px auto;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  justify-content: space-between;
+}
+
+footer > .container > div {
+  flex-wrap: nowrap;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+  justify-content: right;
 }

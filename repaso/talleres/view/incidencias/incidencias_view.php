@@ -7,10 +7,10 @@
     <title>Incidencias</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6f2882733f.js" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="../css/incidencias.css">
     <link rel="stylesheet" href="../css/gestor.css">
     <link rel="stylesheet" href="../css/navbar.css">
-
 </head>
 
 <body>
@@ -50,50 +50,66 @@
                 ?>
             </ul>
         </section>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Descripción</th>
-                    <th>Fecha</th>
-                    <th>Fecha solución</th>
-                    <th>Aula asociado</th>
-                    <th>Profesor autor</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($incidencias as $incidencia) : ?>
-                    <tr>
-                        <td><?= $incidencia['descripcion'] ?></td>
-                        <td><?= $incidencia['fecha'] ?></td>
-                        <td><?= $incidencia['fecha_solucion'] ?></td>
-                        <?php
-                        foreach ($aulas as $aula) {
-                            if ($incidencia['aulas_id'] == $aula['id']) {
-                                $aulaCodigo = $aula['codigo'];
-                            }
-                        }
-                        ?>
-                        <td><?= $aulaCodigo ?></td>
-                        <?php
-                        foreach ($profesores as $profesor) {
-                            if ($incidencia['profesores_id'] == $profesor['id']) {
-                                $profesorNombre = $profesor['nombre'];
-                            }
-                        }
-                        ?>
-                        <td><?= $profesorNombre ?></td>
-                        <td>
-                            <a href="/incidencias/edit/<?= $incidencia['id'] ?>" class="btn btn-primary">Editar</a>
-                            <a href="/incidencias/delete/<?= $incidencia['id'] ?>" class="btn btn-danger">Eliminar</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <a href="/incidencias/add" class="btn btn-primary" id="add_btn"><i class="fa-solid fa-plus"></i></a>
+        <section>
+            <article class="container">
+                <a href="/incidencias/add" class="btn" id="add_btn">Añadir</a>
+            </article>
 
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Fecha</th>
+                        <th>Fecha solución</th>
+                        <th>Aula asociado</th>
+                        <th>Profesor autor</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($incidencias as $incidencia) : ?>
+                        <tr>
+                            <td><?= $incidencia['descripcion'] ?></td>
+                            <td><?= $incidencia['fecha'] ?></td>
+                            <td><?= $incidencia['fecha_solucion'] ?></td>
+                            <?php
+                            foreach ($aulas as $aula) {
+                                if ($incidencia['aulas_id'] == $aula['id']) {
+                                    $aulaCodigo = $aula['codigo'];
+                                }
+                            }
+                            ?>
+                            <td><?= $aulaCodigo ?></td>
+                            <?php
+                            foreach ($profesores as $profesor) {
+                                if ($incidencia['profesores_id'] == $profesor['id']) {
+                                    $profesorNombre = $profesor['nombre'];
+                                }
+                            }
+                            ?>
+                            <td><?= $profesorNombre ?></td>
+                            <td>
+                                <a href="/incidencias/edit/<?= $incidencia['id'] ?>" class="btn btn-primary">Editar</a>
+                                <a href="/incidencias/delete/<?= $incidencia['id'] ?>" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
     </main>
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <p class="mb-0">&copy; <?php echo "IES GRAN CAPITÁN " . date("Y"); ?> | Avda Arcos de la Frontera s/n, Córdoba (Spain) | Tel: 957379710</p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/iesgrancapitan" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/iesgrancapitan" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/iesgrancapitan/" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

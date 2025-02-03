@@ -1,22 +1,40 @@
 h1 {
-    text-align: center;
-    margin: 20px;
+  text-align: center;
+  margin: 20px;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-}
-table {
-    margin: 10px;
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-a[href="/profesores/add"] {
-    bottom: 20px;
-    right: 20px;
-    position: fixed;
+section {
+  width: 100%;
 }
-  
+table {
+  margin: 10px;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  justify-content: space-between;
+}
+
+footer > .container > div {
+  flex-wrap: nowrap;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+  justify-content: right;
+}

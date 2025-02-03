@@ -58,7 +58,6 @@ class EquiposController extends BaseController
                 't_estados_id' => $equipos->get($numero)[0]['t_estados_id'],
                 'created_at' => $equipos->get($numero)[0]['created_at'],
                 'updated_at' => $equipos->get($numero)[0]['updated_at'],
-                'css' => $equipos->get($numero)[0]['css']
             ];
         }
         $this->renderHTML('../view/equipos/edit_view.php', $data);
@@ -74,4 +73,5 @@ class EquiposController extends BaseController
         $equipos->delete($numero);
         header('Location: /gestor/equipos');
     }
+
 }

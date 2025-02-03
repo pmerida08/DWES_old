@@ -21,7 +21,7 @@
         <li class="nav-item">
             <?php
             if ($_SESSION['perfil'] == 'profesor') {
-                echo '<a href="/gestor/aulas" class="nav-link">Gestor de datos</a>';
+                echo '<a href="/gestor/aulas" class="btn btn-secondary">Gestor de datos</a>';
                 echo '</li>';
                 echo '<li class="nav-item">';
                 echo '<a href="/logout" class="btn btn-danger">Cerrar sesión</a>';
@@ -50,12 +50,18 @@
             </a>
         <?php endforeach; ?>
     </div>
-
-    <?php
-    if ($_SESSION['perfil'] == 'profesor') {
-        echo '<a href="/aulas/add" class="btn btn-primary" id="add_btn"><i class="fa-solid fa-plus"></i></a>';
-    }
-    ?>
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <p class="mb-0">&copy; <?php echo "IES GRAN CAPITÁN " . date("Y"); ?> | Avda Arcos de la Frontera s/n, Córdoba (Spain) | Tel: 957379710</p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/iesgrancapitan" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/iesgrancapitan" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/iesgrancapitan/" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

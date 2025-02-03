@@ -188,4 +188,5 @@ class Equipos extends DBAbstractModel
         $this->getResultsFromQuery();
         return $this->rows;
     }
+
 }

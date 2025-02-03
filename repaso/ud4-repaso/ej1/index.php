@@ -54,7 +54,7 @@ if (isset($_POST['procesarFormTest'])) {
 
 if (isset($_POST['procesarExamTest'])) {
     $numtest = $_POST['test'];
-    var_dump($_POST);
+    var_dump($_POST['procesarExamTest']);
     $aTestActual = $aTests[$numtest]['Preguntas'];
 
     $aciertos = 0;

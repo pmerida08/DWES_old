@@ -35,6 +35,7 @@ class AulasController extends BaseController
             $aula->setCodigo($_POST['codigo']);
             $aula->setT_agrupamiento_grupos_id($_POST['t_agrupamiento_grupos_id']);
             $aula->setNum_mesas($_POST['numero_mesas']);
+            $aula->setDescripcion($_POST['descripcion']);
             $aula->set();
             header('Location: /gestor/aulas');
         }
@@ -52,6 +53,7 @@ class AulasController extends BaseController
             $aula->setCodigo($_POST['codigo']);
             $aula->setT_agrupamiento_grupos_id($_POST['t_agrupamiento_grupos_id']);
             $aula->setNum_mesas($_POST['numero_mesas']);
+            $aula->setDescripcion($_POST['descripcion']);
             $aula->edit();
             header('Location: /gestor/aulas');
         } else {
@@ -60,7 +62,8 @@ class AulasController extends BaseController
                 'id' => $numero,
                 'codigo' => $aula->get($numero)[0]['codigo'],
                 't_agrupamiento_grupos_id' => $aula->get($numero)[0]['t_agrupamiento_grupos_id'],
-                'numero_mesas' => $aula->get($numero)[0]['numero_mesas']
+                'numero_mesas' => $aula->get($numero)[0]['numero_mesas'],
+                'descripcion' => $aula->get($numero)[0]['descripcion']
             ];
         }
         $this->renderHTML('../view/aulas/edit_view.php', $data);
@@ -93,6 +96,7 @@ class AulasController extends BaseController
             'id' => $numero,
             'aula_codigo' => $aula->get($numero)[0]['codigo'],
             'numero_mesas' => $aula->get($numero)[0]['numero_mesas'],
+            'descripcion' => $aula->get($numero)[0]['descripcion'],
             'incidencias' => $incidencia->getAll(),
             'equipos' => $equipos->getAll(),
             'profesores' => $profesor->getAll(),

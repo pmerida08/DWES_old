@@ -210,22 +210,36 @@ $router->add([
 
 $router->add([
     'name' => 'alumnos_edit',
-    'path' => '/^\/alumno\/edit\/\d+$/',
+    'path' => '/^\/alumnos\/edit\/\d+$/',
     'action' => [AlumnosController::class, 'EditAction'],
     'auth' => ['profesor']
 ]);
 
 $router->add([
     'name' => 'alumnos_delete',
-    'path' => '/^\/alumno\/delete\/\d+$/',
+    'path' => '/^\/alumnos\/delete\/\d+$/',
     'action' => [AlumnosController::class, 'DeleteAction'],
     'auth' => ['profesor']
 ]);
 
 $router->add([
     'name' => 'alumnos_add',
-    'path' => '/^\/alumno\/add$/',
+    'path' => '/^\/alumnos\/add$/',
     'action' => [AlumnosController::class, 'AddAction'],
+    'auth' => ['profesor']
+]);
+
+$router->add([
+    'name' => 'alumnos_import',
+    'path' => '/^\/alumnos\/import$/',
+    'action' => [AlumnosController::class, 'ImportAction'],
+    'auth' => ['profesor']
+]);
+
+$router->add([
+    'name' => 'alumnos_export',
+    'path' => '/^\/alumnos\/export$/',
+    'action' => [AlumnosController::class, 'ExportAction'],
     'auth' => ['profesor']
 ]);
 

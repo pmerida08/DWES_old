@@ -35,8 +35,8 @@ function check_name($name) {
 
         while (($fila = fgetcsv($file)) !== false) {
             $alumno = $fila[0];
-            $alumno_checked = check_name($alumno);
-            echo "$alumno_checked\n";
+            $alumno_checked = check_name(name: $alumno);
+            echo "$alumno_checked\n <br>";
         }
 
         fclose($file);

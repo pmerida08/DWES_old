@@ -65,13 +65,13 @@
             <div class="group">
                 <div id="projects">
                     <div class="project">
-                        <a href="../index.html">
+                        <a href="../index.php">
                         <img src="img/default_photo.png" alt="default_photo">
                         <h3>ACTIVIDADES DE CLASE</h3>
                         </a>
                     </div>
                     <div class="project">
-                        <a href="../actividadesEvaluables/index.html">
+                        <a href="../actividadesEvaluables/index.php">
                         <img src="img/default_photo.png" alt="default_photo">
                         <h3>ACTIVIDADES EVALUABLES</h3>
                         </a>

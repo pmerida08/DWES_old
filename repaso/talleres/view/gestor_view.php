@@ -14,6 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/gestor.css">
     <link rel="stylesheet" href="../css/navbar.css">
+    <script src="https://kit.fontawesome.com/6f2882733f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>

@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <img src="https://www.iesgrancapitan.org/wp-content/uploads/sites/2/2021/06/Logo_IES_GranCapitan_header.png" alt="logo" width="50" height="50" class="d-inline-block align-text-top">
         <div class="container-fluid">
             <h2 class="navbar-brand">Talleres</h2>
@@ -31,7 +31,7 @@
         <section class="container">
 
             <h2>Dashboard</h2>
-            
+
             <ul class="list-group">
                 <?php
                 echo '<li class="list-group-item"><a href="/gestor/aulas" class="text-decoration-none">Gestor de Aulas</a></li>';
@@ -43,33 +43,54 @@
                 ?>
             </ul>
         </section>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Activo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($data as $alumno) : ?>
+        <section>
+            <article class="container">
+                <a href="/alumnos/add" class="btn" id="add_btn">Añadir</a>
+                <!-- <a href="/alumnos/import" class="btn" id="import_btn">Importar</a> -->
+                <a href="/alumnos/export" class="btn" id="export_btn">Exportar</a>
+
+            </article>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><?= $alumno['nombre'] ?></td>
-                        <td><?= $alumno['email'] ?></td>
-                        <td><?= $alumno['activo'] == 1 ? 'Activo' :  'Inactivo' ?></td>
-                        <td>
-                            <a href="/alumnos/edit/<?= $alumno['id'] ?>" class="btn btn-primary">Editar</a>
-                            <a href="/alumnos/delete/<?= $alumno['id'] ?>" class="btn btn-danger">Eliminar</a>
-                        </td>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <a href="/alumnos/add" class="btn btn-primary" id="add_btn"><i class="fa-solid fa-plus"></i></a>
+                </thead>
+                <tbody>
+                    <?php foreach ($data as $alumno) : ?>
+                        <tr>
+                            <td><?= $alumno['nombre'] ?></td>
+                            <td><?= $alumno['email'] ?></td>
+                            <td><?= $alumno['activo'] == 1 ? 'Activo' :  'Inactivo' ?></td>
+                            <td>
+                                <a href="/alumnos/edit/<?= $alumno['id'] ?>" class="btn btn-primary">Editar</a>
+                                <a href="/alumnos/delete/<?= $alumno['id'] ?>" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </section>
 
     </main>
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <p class="mb-0">&copy; <?php echo "IES GRAN CAPITÁN " . date("Y"); ?> | Avda Arcos de la Frontera s/n, Córdoba (Spain) | Tel: 957379710</p>
+                <div class="socials">
+                    <a href="https://www.facebook.com/iesgrancapitan" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://twitter.com/iesgrancapitan" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/iesgrancapitan/" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
+
+
 
 </html>

@@ -5,7 +5,13 @@ h1 {
 
 body {
   margin: 0;
+  overflow-x: hidden;
 }
+
+section {
+  width: 100%;
+}
+
 table {
   margin: 10px;
   width: 100%;
@@ -13,8 +19,22 @@ table {
   border-spacing: 0;
 }
 
-a[href="/incidencias/add"] {
-  bottom: 20px;
-  right: 20px;
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
   position: fixed;
+  bottom: 0;
+  width: 100%;
+  justify-content: space-between;
+}
+
+footer > .container > div {
+  flex-wrap: nowrap;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+  justify-content: right;
 }
