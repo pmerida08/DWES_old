@@ -35,23 +35,23 @@ if ($request == '/login/') {
 }
 
 
-$input = array(json_decode(file_get_contents('php://input'), TRUE));
-$autHeader = $_SERVER['HTTP_AUTHORIZATION'];
-$arr = explode(" ", $autHeader);
-$jwt = $arr[1];
+// $input = array(json_decode(file_get_contents('php://input'), TRUE));
+// $autHeader = $_SERVER['HTTP_AUTHORIZATION'];
+// $arr = explode(" ", $autHeader);
+// $jwt = $arr[1];
 
-if ($jwt) {
+// if ($jwt) {
 
-    try {
-        $deccoded = JWT::decode($jwt, new Key(KEY, 'HS256'));
-    } catch (Exception $e) {
-        echo json_encode(array(
-            "message" => "Acceso denegado",
-            "error" => $e->getMessage()
-        ));
-        exit(http_response_code(401));
-    }
-}
+//     try {
+//         $deccoded = JWT::decode($jwt, new Key(KEY, 'HS256'));
+//     } catch (Exception $e) {
+//         echo json_encode(array(
+//             "message" => "Acceso denegado",
+//             "error" => $e->getMessage()
+//         ));
+//         exit(http_response_code(401));
+//     }
+// }
 
 $router = new Router();
 $router->add(array(

@@ -3,7 +3,8 @@
 namespace App\Models;
 
 require_once("DBAbstractModel.php");
-class Contactos extends DBAbstractModel
+
+class Instalaciones extends DBAbstractModel
 {
     //Singleton
     private static $instancia;
@@ -27,10 +28,11 @@ class Contactos extends DBAbstractModel
         foreach ($data as $campo => $valor) {
             $$campo = $valor;
         }
-        $this->query = "INSERT INTO contactos(nombre,telefono,email) VALUES(:nombre, :telefono, :email)";
+        $this->query = "INSERT INTO instalaciones(nombre,descripcion,centcivicos_id,capacidad_max) VALUES(:nombre, :descripcion, :centcivicos_id, :capacidad_max)";
         $this->parametros['nombre'] = $nombre;
-        $this->parametros['telefono'] = $telefono;
-        $this->parametros['email'] = $email;
+        $this->parametros['descripcion'] = $descripcion;
+        $this->parametros['centcivicos_id'] = $centcivicos_id;
+        $this->parametros['capacidad_max'] = $capacidad_max;
         $this->get_results_from_query();
         $this->mensaje = 'SH añadido';
     }
@@ -38,7 +40,7 @@ class Contactos extends DBAbstractModel
     public function get($id = "") // funciona
     {
         if ($id != '') {
-            $this->query = "SELECT * FROM contactos WHERE id = :id";
+            $this->query = "SELECT * FROM instalaciones WHERE id = :id";
             $this->parametros['id'] = $id;
             $this->get_results_from_query();
         }
@@ -47,7 +49,7 @@ class Contactos extends DBAbstractModel
                 $this->$propiedad = $valor;
             }
             $this->mensaje = 'sh encontrado';
-            return $this->rows[0]; // para que no te devuelva el valor del id en el resultado
+            return $this->rows[0];
         } else {
             $this->mensaje = 'sh no encontrado';
             return [];
@@ -56,39 +58,38 @@ class Contactos extends DBAbstractModel
 
     public function edit($id = "", $user_data = []) // funciona
     {
-        $fecha = new \DateTime();
         foreach ($user_data as $campo => $valor) {
             $$campo = $valor;
         }
-
-        $this->query = "UPDATE contactos
-        SET nombre=:nombre,
-        telefono=:telefono,
-        email=:email,
-        updated_at=:fecha
-        WHERE id=:id";
-
+        $this->query = "UPDATE instalaciones SET nombre=:nombre, descripcion=:descripcion, centcivicos_id=:centcivicos_id, capacidad_max=:capacidad_max WHERE id = :id";
         $this->parametros['id'] = $id;
         $this->parametros['nombre'] = $nombre;
-        $this->parametros['telefono'] = $telefono;
-        $this->parametros['email'] = $email;
-
-        $this->parametros['fecha'] = date("Y-m-d H:m:s", $fecha->getTimestamp());
+        $this->parametros['descripcion'] = $descripcion;
+        $this->parametros['centcivicos_id'] = $centcivicos_id;
+        $this->parametros['capacidad_max'] = $capacidad_max;
         $this->get_results_from_query();
-        $this->mensaje = 'SH modificado';
+        $this->mensaje = 'sh modificado';
     }
 
-    public function delete($id = "") // funciona
+    public function delete($id = "")
     {
-        $this->query = "DELETE FROM contactos WHERE id = :id";
+        $this->query = "DELETE FROM instalaciones WHERE id = :id";
         $this->parametros['id'] = $id;
         $this->get_results_from_query();
-        $this->mensaje = 'Contacto eliminado';
+        $this->mensaje = 'sh eliminado';
     }
-    public function getAll() // funciona
+
+    public function getAll()
     {
-        $this->query = "SELECT * FROM contactos";
+        $this->query = "SELECT * FROM instalaciones";
         $this->get_results_from_query();
-        return $this->rows;
+
+        if (count($this->rows) >= 1) {
+            $this->mensaje = 'sh encontrado';
+            return $this->rows;
+        } else {
+            $this->mensaje = 'sh no encontrado';
+            return [];
+        }
     }
 }

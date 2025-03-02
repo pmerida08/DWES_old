@@ -2,10 +2,13 @@
 
 require '../bootstrap.php';
 
-
-use App\Controllers\ContactosController as ControllersContactosController;
+use App\Controllers\ActividadesController;
+use App\Controllers\CentCivicosController as CentCivicosController;
 use App\Core\Router;
 use App\Controllers\AuthController;
+use App\Controllers\InscripcionesController;
+use App\Controllers\InstalacionesController;
+use App\Controllers\ReservasController;
 use \Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
@@ -27,9 +30,16 @@ if (isset($uri[2])) {
     $userId = (int) $uri[2];
 }
 
-if ($request == '/login/') {
+if ($request == '/login/') { // POST
     $auth = new AuthController($requestMethod);
     if (!$auth->loginFromRequest()) {
+        exit(http_response_code(401));
+    }
+}
+
+if ($request == '/register/') { // POST
+    $auth = new AuthController($requestMethod);
+    if (!$auth->registerFromRequest()) {
         exit(http_response_code(401));
     }
 }
@@ -54,12 +64,106 @@ if ($jwt) {
 }
 
 $router = new Router();
-$router->add(array(
-    'name' => 'contactos',
-    'path' => '/^\/contactos\/([0-9]+)?$/',
-    'action' => ControllersContactosController::class,
+
+// $router->add(array( // POST
+//     'name' => 'tokenRefresh',
+//     'path' => '/^\/token\/refresh$/',
+//     'action' => ControllersContactosController::class,
+// ));
+
+$router->add(array( // GET
+    'name' => 'infoUser',
+    'path' => '/^\/user$/',
+    'action' => UserController::class,
 ));
 
+$router->add(array( // PUT
+    'name' => 'updateUser',
+    'path' => '/^\/user$/',
+    'action' => UserController::class,
+));
+
+$router->add(array( // DELETE
+    'name' => 'deleteUser',
+    'path' => '/^\/user$/',
+    'action' => UserController::class,
+));
+
+// Centros
+
+$router->add(array( // GET
+    'name' => 'centros',
+    'path' => '/^\/centros$/',
+    'action' => CentCivicosController::class,
+));
+
+$router->add(array( // GET
+    'name' => 'infoCentro',
+    'path' => '/^\/centros\/(\d+)$/',
+    'action' => CentCivicosController::class,
+));
+
+// Instalaciones
+
+$router->add(array( // GET
+    'name' => 'instalacionCentroCiv',
+    'path' => '/^\/centros\/(\d+)\/instalaciones$/',
+    'action' => InstalacionesController::class,
+));
+
+$router->add(array( // GET
+    'name' => 'instalaciones',
+    'path' => '/^\/instalaciones$/',
+    'action' => InstalacionesController::class,
+));
+
+// Actividades
+
+$router->add(array( // GET
+    'name' => 'actividadesCentroCiv',
+    'path' => '/^\/centros\/(\d+)\/actividades$/',
+    'action' => ActividadesController::class,
+));
+
+$router->add(array( // GET
+    'name' => 'actividades',
+    'path' => '/^\/actividades$/',
+    'action' => ActividadesController::class,
+));
+
+// Reservas
+
+$router->add(array( // POST
+    'name' => 'nuevaReservas',
+    'path' => '/^\/reservas$/',
+    'action' => ReservasController::class,
+));
+
+$router->add(array( // DELETE
+    'name' => 'cancelarReservas',
+    'path' => '/^\/reservas\/(\d+)$/',
+    'action' => ReservasController::class,
+));
+
+$router->add(array( // GET
+    'name' => 'misReservas',
+    'path' => '/^\/reservas$/',
+    'action' => ReservasController::class,
+));
+
+// Inscripciones
+
+$router->add(array( // POST
+    'name' => 'nuevaInscripcion',
+    'path' => '/^\/inscripciones$/',
+    'action' => InscripcionesController::class,
+));
+
+$router->add(array( // DELETE
+    'name' => 'cancelarInscripcion',
+    'path' => '/^\/inscripciones\/(\d+)$/',
+    'action' => InscripcionesController::class,
+));
 
 
 $route = $router->match($request);

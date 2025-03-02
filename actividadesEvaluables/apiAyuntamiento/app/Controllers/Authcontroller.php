@@ -6,25 +6,28 @@ use \Firebase\JWT\JWT;
 use \Firebase\JWT\key;
 use App\Models\Users;
 
-class AuthController{
+class AuthController
+{
     private $requestMethod;
     private $userId;
     private $users;
-    public function __construct($requestMethod){
+    public function __construct($requestMethod)
+    {
         $this->requestMethod = $requestMethod;
         $this->users = Users::getInstancia();
     }
-    public function loginFromRequest(){
+    public function loginFromRequest()
+    {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        $usuario = $input['usuario'];
+        $usuario = $input['nombre'];
         $password = $input['password'];
-        $dataUser = $this->users->login($usuario,$password);
+        $dataUser = $this->users->login($usuario, $password);
 
-        if ($dataUser){
+        if ($dataUser) {
             $key = KEY;
-            $issuer_claim = "http://contactos.local";
-            $audience_claim = "http://contactos.local";
+            $issuer_claim = "http://ayuntapi.local";
+            $audience_claim = "http://ayuntapi.local";
             $issuedat_claim = time();
             $notbefore_claim = time();
             $expire_claim = $issuedat_claim + 3600;
@@ -39,24 +42,37 @@ class AuthController{
                 )
             );
 
-            $jwt = JWT::encode($token, $key,'HS256');
+            $jwt = JWT::encode($token, $key, 'HS256');
             $res = json_encode(
-                    array(
-                        "message" => "Login correcto",
-                        "jwt" => $jwt,
-                        "email" => $usuario,
-                        "expireAt" => $expire_claim
-                    ));
+                array(
+                    "message" => "Login correcto",
+                    "jwt" => $jwt,
+                    "email" => $usuario,
+                    "expireAt" => $expire_claim
+                )
+            );
             $response['status_code_header'] = 'HTTP/1.1 201 CREATED';
             $response['body'] = $res;
-            
-        }else{
+        } else {
             $response['status_code_header'] = 'HTTP/1.1 401 Unauthorized';
             $response['body'] = null;
         }
         header($response['status_code_header']);
-        if ($response['body']){
+        if ($response['body']) {
             echo $response['body'];
         }
+    }
+
+    public function registerFromRequest()
+    {
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        $nombre = $input['nombre'];
+        $email = $input['email'];
+        $password = $input['password'];
+        $this->users->register($nombre, $email, $password);
+        $response['status_code_header'] = 'HTTP/1.1 201 CREATED';
+        $response['body'] = json_encode(array("message" => "Usuario añadido"));
+        header($response['status_code_header']);
+        echo $response['body'];
     }
 }
