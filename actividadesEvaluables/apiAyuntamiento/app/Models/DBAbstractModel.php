@@ -14,6 +14,7 @@ abstract class DBAbstractModel
     protected $query; //consulta
     protected $parametros = array(); //parámetros de entrada
     protected $rows = array(); //array con los datos de salida
+    protected $affected_rows; //filas afectadas
 
     //Metodos abstractos para implementar en los diferentes módulos. CRUD
     abstract protected function get(); //Read
@@ -71,6 +72,7 @@ abstract class DBAbstractModel
         } catch (\PDOException $e) {
             printf("Error en consulta: %s\n", $e->getMessage());
         }
+        $this->affected_rows = $_stmt->rowCount();
     }
 }
 

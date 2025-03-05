@@ -1,0 +1,17 @@
+<div class="actividades-container">
+  <h2>Actividades</h2>
+
+  <div class="actividades-grid">
+    <div class="actividades-card" *ngFor="let actividad of actividades">
+      <h3>{{ actividad.nombre }}</h3>
+      <p><strong>Descripcion: </strong>{{ actividad.descripcion }}</p>
+      <p><strong>Fecha inicio: </strong>{{ actividad.fecha_inicio }}</p>
+      <p><strong>Fecha final: </strong>{{ actividad.fecha_final }}</p>
+      <p><strong>Horario: </strong>{{ actividad.horario }}</p>
+      <p><strong>Plazas: </strong>{{ actividad.plaza }}</p>
+      <p>
+        <strong>Centro civico asignado: </strong>{{ actividad.centcivicos_id }}
+      </p>
+    </div>
+  </div>
+</div>

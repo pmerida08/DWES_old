@@ -1,0 +1,10 @@
+<div class="centros-container">
+  <h2>Centros Civicos</h2>
+
+  <div class="centros-grid">
+    <div class="centros-card" *ngFor="let centro of centros">
+      <h3>{{ centro.nombre }}</h3>
+      <p><strong>Direccion: </strong>{{ centro.direccion }}</p>
+    </div>
+  </div>
+</div>

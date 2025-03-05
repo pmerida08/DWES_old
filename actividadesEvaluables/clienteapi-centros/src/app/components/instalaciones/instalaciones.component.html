@@ -1,0 +1,12 @@
+<div class="instalaciones-container">
+    <h2>Instalaciones</h2>
+
+    <div class="instalaciones-grid">
+        <div class="instalaciones-card" *ngFor="let instalacion of instalaciones">
+            <h3>{{ instalacion.nombre }}</h3>
+            <p><strong>Descripcion: </strong>{{ instalacion.descripcion }}</p>
+            <p><strong>Capacidad: </strong>{{ instalacion.capacidad_max }}</p>
+            <p><strong>Centro civico asignado: </strong>{{ instalacion.centcivicos_id }}</p>
+        </div>
+    </div>
+</div>

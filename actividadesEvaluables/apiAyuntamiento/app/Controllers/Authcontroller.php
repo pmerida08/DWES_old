@@ -20,9 +20,10 @@ class AuthController
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-        $usuario = $input['nombre'];
+        $usuario = $input['email'];
         $password = $input['password'];
         $dataUser = $this->users->login($usuario, $password);
+        $usuarioId = $this->users->getIdByEmail($usuario);
 
         if ($dataUser) {
             $key = KEY;
@@ -38,7 +39,7 @@ class AuthController
                 "nbf" => $notbefore_claim,
                 "exp" => $expire_claim,
                 "data" => array(
-                    "usuario" => $usuario,
+                    "usuarioId" => $usuarioId
                 )
             );
 
@@ -51,6 +52,7 @@ class AuthController
                     "expireAt" => $expire_claim
                 )
             );
+            
             $response['status_code_header'] = 'HTTP/1.1 201 CREATED';
             $response['body'] = $res;
         } else {
