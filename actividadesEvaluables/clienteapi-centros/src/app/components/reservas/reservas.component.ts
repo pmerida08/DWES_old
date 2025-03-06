@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Reserva } from '../../models/reserva';
 import { ReservasService } from '../../services/reservas/reservas.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reservas',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './reservas.component.html',
   styleUrl: './reservas.component.css'
 })

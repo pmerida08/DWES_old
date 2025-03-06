@@ -32,10 +32,4 @@ export class ActividadesComponent implements OnInit {
       },
     });
   }
-
-  verActividad(id: number) {
-    this.router.navigate(['/actividad', id]);
-    console.log('Ver actividad', id);
-  }
-
 }

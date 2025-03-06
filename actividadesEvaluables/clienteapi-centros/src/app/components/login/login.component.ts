@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     const token = localStorage.getItem('jwt');
     if (token) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['home']);
     }
   }
 
@@ -27,15 +27,20 @@ export class LoginComponent implements OnInit {
     console.log('Iniciando sesión', this.usuario);
     this.usuarioService.login(this.usuario).subscribe({
       next: (response) => {
+        // console.log('Token recibido:', response.token);
+        localStorage.setItem('jwt', response.token);
 
-        console.log('Respuesta:', response);
-        
-        const now = new Date().getTime();
-        const expire = now + 3600000;
-        localStorage.setItem('jwt_expires', expire.toString());
-        localStorage.setItem('jwt', response.jwt);
-        localStorage.setItem('user', response.user);
-        console.log('jwt: ', response.jwt);
+        this.usuarioService.getUsuario().subscribe({
+          next: (userData) => {
+            console.log('Datos del usuario:', userData);
+            // localStorage.setItem('userId', userData.id);
+            // localStorage.setItem('userName', userData.nombre);
+          },
+          error: (error) => {
+            console.error('❌ Error al obtener los datos del usuario:', error);
+          },
+        });
+
         this.router.navigate(['home']);
       },
       error: (error) => {

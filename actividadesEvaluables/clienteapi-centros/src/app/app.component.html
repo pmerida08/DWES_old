@@ -1,23 +1,37 @@
 <header>
   <nav class="navbar">
     <div class="nav-left">
-      <img src="assets/logo.png" alt="Logo" class="logo">
+      <img src="assets/logo.png" alt="Logo" class="logo" />
       <ul class="nav-links">
         <li><a href="/centros">Centros</a></li>
         <li><a href="/instalaciones">Instalaciones</a></li>
         <li><a href="/actividades">Actividades</a></li>
-        <li ngIf="isAuthenticated"><a href="/reservas">Reservas</a></li>
-        <li ngIf="isAuthenticated"><a href="/inscripciones">Inscripciones</a></li>
+        <li *ngIf="isAuthenticated"><a href="/reservas">Reservas</a></li> <!-- Usé *ngIf correctamente -->
+        <li *ngIf="isAuthenticated">
+          <a href="/inscripciones">Inscripciones</a>
+        </li>
       </ul>
     </div>
     <div class="nav-right">
       <!-- Si el usuario está autenticado, mostramos 'Logout' -->
-      <a ngIf="isAuthenticated" href="/logout" class="register-btn" (click)="logout()">Logout</a>
-      <a ngIf="isAuthenticated" href="/perfil" class="register-btn">Mi Cuenta</a>
+      <a
+        *ngIf="isAuthenticated == true"
+        href="/logout"
+        class="register-btn"
+        (click)="logout()"
+        >Logout</a
+      >
+      <a *ngIf="isAuthenticated == true" href="/user" class="register-btn"
+        >Mi Cuenta</a
+      >
 
       <!-- Si el usuario no está autenticado, mostramos 'Register' y 'Login' -->
-      <a ngIf="!isAuthenticated" href="/registro" class="register-btn">Register</a>
-      <a ngIf="!isAuthenticated" href="/login" class="login-btn">Login</a>
+      <a *ngIf="isAuthenticated == false" href="/registro" class="register-btn"
+        >Register</a
+      >
+      <a *ngIf="isAuthenticated == false" href="/login" class="login-btn"
+        >Login</a
+      >
     </div>
   </nav>
 </header>

@@ -6,28 +6,33 @@ import { ActividadesComponent } from './components/actividades/actividades.compo
 import { InstalacionesComponent } from './components/instalaciones/instalaciones.component';
 import { ReservasComponent } from './components/reservas/reservas.component';
 import { InscripcionesComponent } from './components/inscripciones/inscripciones.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { ActividadesCentroCivComponent } from './components/actividades-centro-civ/actividades-centro-civ.component';
 
 export const routes: Routes = [
     {path: 'centros', component: CentrosComponent},
-    {path: 'centro/:id', component: CentrosComponent},
+    {path: 'centros/:id', component: CentrosComponent},
     
     {path: 'actividades', component: ActividadesComponent},
     {path: 'actividad/:id', component: ActividadesComponent},
 
     {path: "instalaciones", component: InstalacionesComponent},
-    {path: "centro/:id/instalaciones", component: InstalacionesComponent},
+    {path: "centros/:id/instalaciones", component: InstalacionesComponent},
 
     {path: "actividades", component: ActividadesComponent},
-    {path: "centro/:id/actividades", component: ActividadesComponent},
+    {path: "centros/:centroId/actividades", component: ActividadesCentroCivComponent},
 
     {path: "reservas", component: ReservasComponent},
-    {path: "reserva/:id", component: ReservasComponent},
+    {path: "reservas/:id", component: ReservasComponent},
 
     {path: "inscripciones", component: InscripcionesComponent},
-    {path: "inscripcion/:id", component: InscripcionesComponent},
+    {path: "inscripciones/:id", component: InscripcionesComponent},
     
     {path: "registro", component: RegistroComponent},
     {path: "login", component: LoginComponent},
+
+    {path: "user", component: UsuarioComponent},
+    {path: "token/refresh", component: UsuarioComponent},
 
     {path: "", redirectTo: "centros", pathMatch: "full"},
     {path: "**", redirectTo: "centros", pathMatch: "full"}

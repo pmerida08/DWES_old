@@ -18,6 +18,12 @@ header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Conte
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 
+
+// Responde a las solicitudes OPTIONS (preflight) de CORS
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    exit(0); // No hacer nada para la solicitud OPTIONS
+}
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode('/', $request);
@@ -182,7 +188,7 @@ $router->add([
 
 $router->add([
     'name' => 'misInscripciones',
-    'path' => '/^\/inscripciones$/',
+    'path' => '/^\/inscripciones$/', 
     'action' => InscripcionesController::class,
     'auth' => ['usuario'],
 ]);

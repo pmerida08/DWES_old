@@ -5,9 +5,9 @@ export interface CentroCivico {
     id: number;
     nombre: string;
     direccion: string;
-    telefono: string;
+    tel_contacto: string;
     horario: string;
     foto: string;
-    actividades: Actividades[];
-    instalaciones: Instalacion[];
+    // actividades: Actividades[];
+    // instalaciones: Instalacion[];
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from '../../models/usuario';
-import { catchError, Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -23,19 +23,19 @@ export class UsuarioService {
     );
   }
 
-  getPerfil(): Observable<any> {
+  getUsuario(): Observable<any> {
     const headers = this.getAuthHeaders();
-    return this.http
-      .get(`${this.baseUrl}/user`, { headers, observe: 'response' })
-      .pipe(
-        tap((response) => {
-          console.log('Respuesta completa:', response);
-        }),
-        catchError((error) => {
-          console.error('❌ Error en la solicitud del perfil:', error);
-          return error;
-        })
-      );
+    return this.http.get(`${this.baseUrl}/user`, { headers }).pipe(
+      tap((response) => {
+        console.log('Respuesta del perfil:', response);
+      }),
+      catchError((error) => {
+        console.error('❌ Error en la solicitud del perfil:', error);
+        return throwError(
+          () => new Error('Error al obtener los datos del perfil')
+        );
+      })
+    );
   }
 
   editUsuario(usuario: Usuario) {
@@ -88,5 +88,9 @@ export class UsuarioService {
   private decodeJwt(token: string): any {
     const payload = token.split('.')[1];
     return JSON.parse(atob(payload));
+  }
+
+  public refreshToken() {
+    return this.http.post(`${this.baseUrl}/token/refresh/`, {});
   }
 }

@@ -19,10 +19,13 @@ function decodificarToken()
 
     // Decodificar el token JWT
     try {
-        $decoded = JWT::decode($jwt, new Key(KEY, 'HS256')); // Decodificar el token JWT
-        $idUser = $decoded->data->usuarioId; // Asumiendo que la ID del usuario está en el campo 'data->id'
-        return $idUser; // Retornar la ID del usuario
-    } catch (Exception $e) { // Capturar cualquier excepción
+        $decoded = JWT::decode($jwt, new Key(KEY, 'HS256'));
+        // Log o imprimir el token decodificado para ver la estructura
+        echo json_encode($decoded);
+        $idUser = $decoded->data->userId;
+        return $idUser;
+    } catch (Exception $e) {
         return null;
     }
+    
 }

@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Actividades del Centro Cívico</h2>
+  
+    <!-- Mensaje si no hay actividades -->
+    <p *ngIf="actividades.length === 0">No hay actividades disponibles.</p>
+  
+    <!-- Lista de actividades -->
+    <div class="actividad-card" *ngFor="let actividad of actividades">
+      <h3>{{ actividad.nombre }}</h3>
+      <p><strong>Descripción:</strong> {{ actividad.descripcion }}</p>
+      <p><strong>Horario:</strong> {{ actividad.horario }}</p>
+      <p><strong>Plazas Disponibles:</strong> {{ actividad.plaza }}</p>
+      <!-- <button (click)="inscribirse(actividad.id)">Inscribirse</button> -->
+    </div>
+  </div>
+  

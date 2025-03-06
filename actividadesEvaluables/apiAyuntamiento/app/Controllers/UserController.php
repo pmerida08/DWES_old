@@ -53,7 +53,7 @@ class UserController
     public function tokenRefresh()
     {
         $data = json_decode(file_get_contents('php://input'), true);
-        $token = JWT::encode(["user_id" => $this->userId, "role" => "usuario"], KEY, 'HS256');
+        $token = JWT::encode(["userId" => $this->userId, "role" => "usuario"], KEY, 'HS256');
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode(["token" => $token]);
         return $response;
@@ -66,7 +66,8 @@ class UserController
         if (!$result) {
             return $this->notFoundResponse();
         }
-        $token = JWT::encode(["user_id" => $result['id'], "role" => "usuario"], KEY, 'HS256');
+        $token = JWT::encode(["data" => ["userId" => $result['id'], "role" => "usuario"]], KEY, 'HS256');
+
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode(["token" => $token]);
         return $response;

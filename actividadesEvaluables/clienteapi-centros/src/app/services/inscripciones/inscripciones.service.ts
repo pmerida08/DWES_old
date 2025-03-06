@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Inscripcion } from '../../models/inscripcion';
 
@@ -12,7 +12,11 @@ export class InscripcionesService {
   constructor(private http: HttpClient) {}
 
   getInscripciones(): Observable<Inscripcion[]> {
-    return this.http.get<Inscripcion[]>(`${this.baseUrl}/inscripciones`);
+    const token = localStorage.getItem('jwt');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    return this.http.get<Inscripcion[]>(`${this.baseUrl}/inscripciones`, {
+      headers,
+    });
   }
 
   nuevaInscripcion(inscripcion: Inscripcion): Observable<Inscripcion> {

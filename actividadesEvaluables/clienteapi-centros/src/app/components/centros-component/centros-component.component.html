@@ -5,6 +5,18 @@
     <div class="centros-card" *ngFor="let centro of centros">
       <h3>{{ centro.nombre }}</h3>
       <p><strong>Direccion: </strong>{{ centro.direccion }}</p>
+      <p><strong>Telefono: </strong>{{ centro.tel_contacto }}</p>
+      <p><strong>Horario: </strong>{{ centro.horario }}</p>
+      <p>
+        <strong>Imagen: </strong>
+        <img src="../../../assets/{{ centro.foto }}" alt="Imagen de centro" />
+      </p>
+      <p>
+        <a href="centros/{{ centro.id }}/actividades"
+          >Ir a las actividades asignadas</a
+        >
+      </p>
+
     </div>
   </div>
 </div>
