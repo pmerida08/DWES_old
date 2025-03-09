@@ -21,11 +21,7 @@ class InscripcionesController
     {
         switch ($this->requestMethod) {
             case 'GET':
-                if ($this->inscripcionesId) {
-                    $response = $this->getInscripciones($this->inscripcionesId);
-                } else {
-                    $response = $this->getAllInscripciones();
-                };
+                $response = $this->getAllInscripciones();
                 break;
             case 'POST':
                 $response = $this->createInscripcionesFromRequest();
@@ -107,19 +103,7 @@ class InscripcionesController
 
     private function validateInscripciones($input)
     {
-        if (!isset($input['id_usuario'])) {
-            return false;
-        }
-        if (!isset($input['id_actividad'])) {
-            return false;
-        }
-        if (!isset($input['fecha'])) {
-            return false;
-        }
-        if (!isset($input['hora'])) {
-            return false;
-        }
-        if (!isset($input['estado'])) {
+        if (!isset($input['nom_solicitante']) || !isset($input['telefono']) || !isset($input['correo']) || !isset($input['actividades_id']) || !isset($input['fecha_incripcion'])) {
             return false;
         }
         return true;

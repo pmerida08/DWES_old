@@ -21,11 +21,7 @@ class ReservasController
     {
         switch ($this->requestMethod) {
             case 'GET':
-                if ($this->reservasId) {
-                    $response = $this->getReservas($this->reservasId);
-                } else {
-                    $response = $this->getAllReservas();
-                };
+                $response = $this->getAllReservas();
                 break;
             case 'POST':
                 $response = $this->createReservasFromRequest();

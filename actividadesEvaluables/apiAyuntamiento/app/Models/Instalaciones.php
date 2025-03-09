@@ -92,4 +92,20 @@ class Instalaciones extends DBAbstractModel
             return [];
         }
     }
+
+    public function getByCentrosCivicosId($id = "")
+    {
+        if ($id != '') {
+            $this->query = "SELECT * FROM instalaciones WHERE centcivicos_id = :id";
+            $this->parametros['id'] = $id;
+            $this->get_results_from_query();
+        }
+        if (count($this->rows) >= 1) {
+            $this->mensaje = 'sh encontrado';
+            return $this->rows;
+        } else {
+            $this->mensaje = 'sh no encontrado';
+            return [];
+        }
+    }
 }

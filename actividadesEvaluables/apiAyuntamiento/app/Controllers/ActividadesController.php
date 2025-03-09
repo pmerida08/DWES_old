@@ -39,7 +39,7 @@ class ActividadesController
 
     private function getActividades($id)
     {
-        $result = $this->actividades->get($id);
+        $result = $this->actividades->getByCentrosCivicosId($id);
         if (!$result) {
             return $this->notFoundResponse();
         }

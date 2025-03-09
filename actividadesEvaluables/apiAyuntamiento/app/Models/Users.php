@@ -108,4 +108,5 @@ class Users extends DBAbstractModel
         $this->get_results_from_query();
         return $this->rows[0]['id'];
     }
+
 }

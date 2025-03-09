@@ -38,6 +38,8 @@ class UserController
                     $response = $this->register();
                 } elseif ($_SERVER['REQUEST_URI'] === '/login/') {
                     $response = $this->login();
+                } elseif ($_SERVER['REQUEST_URI'] === '/token/refresh/') {
+                    $response = $this->tokenRefresh();
                 }
                 break;
             default:
@@ -53,7 +55,7 @@ class UserController
     public function tokenRefresh()
     {
         $data = json_decode(file_get_contents('php://input'), true);
-        $token = JWT::encode(["userId" => $this->userId, "role" => "usuario"], KEY, 'HS256');
+        $token = JWT::encode(["data" => ["userId" => $data['userId'], "role" => "usuario"]], KEY, 'HS256');
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode(["token" => $token]);
         return $response;

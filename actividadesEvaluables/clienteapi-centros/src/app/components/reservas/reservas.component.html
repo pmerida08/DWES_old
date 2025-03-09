@@ -1,16 +1,29 @@
 <div class="reservas-container">
-    <h2>Reservas</h2>
+  <h2>Reservas</h2>
 
-    <div class="reservas-grid">
-        <div class="reservas-card" *ngFor="let reserva of reservas">
-            <h3>{{ reserva.nom_solicitante }}</h3>
-            <p><strong>Teléfono: </strong>{{ reserva.telefono }}</p>
-            <p><strong>Correo: </strong>{{ reserva.correo }}</p>
-            <p><strong>Instalación reservada: </strong>{{ reserva.instalaciones_id }}</p>
-            <p><strong>Fecha y hora de inicio: </strong>{{ reserva.fechahora_inicio }}</p>
-            <p><strong>Fecha y hora de finalización: </strong>{{ reserva.fechahora_final }}</p>
-            <p><strong>Estado: </strong>{{ reserva.estado }}</p>
-        </div>
+  <button class="btn btn-primary" (click)="nuevaReserva()">
+    Nueva reserva
+  </button>
+  <div class="reservas-grid">
+    <div class="reservas-card" *ngFor="let reserva of reservas">
+      <h3>{{ reserva.nom_solicitante }}</h3>
+      <p><strong>Teléfono: </strong>{{ reserva.telefono }}</p>
+      <p><strong>Correo: </strong>{{ reserva.correo }}</p>
+      <p>
+        <strong>Instalación reservada: </strong>{{ reserva.instalaciones_id }}
+      </p>
+      <p>
+        <strong>Fecha y hora de inicio: </strong>{{ reserva.fechahora_inicio }}
+      </p>
+      <p>
+        <strong>Fecha y hora de finalización: </strong
+        >{{ reserva.fechahora_final }}
+      </p>
+      <p><strong>Estado: </strong>{{ reserva.estado }}</p>
+
+      <button class="btn btn-danger" (click)="cancelarReserva(reserva.id)">
+        Cancelar
+      </button>
     </div>
+  </div>
 </div>
-

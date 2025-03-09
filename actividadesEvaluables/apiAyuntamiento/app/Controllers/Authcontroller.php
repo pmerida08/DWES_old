@@ -62,6 +62,7 @@ class AuthController
         header($response['status_code_header']);
         if ($response['body']) {
             echo $response['body'];
+            return true;
         }
     }
 

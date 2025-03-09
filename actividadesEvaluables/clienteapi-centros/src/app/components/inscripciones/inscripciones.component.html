@@ -1,6 +1,9 @@
 <div class="inscripciones-container">
   <h2>Inscripciones</h2>
 
+  <button class="btn btn-primary" (click)="nuevaInscripcion()">
+    Nueva inscripción
+  </button>
   <div class="inscripciones-grid">
     <div class="inscripciones-card" *ngFor="let inscripcion of inscripciones">
       <h3>{{ inscripcion.nom_solicitante }}</h3>
@@ -13,6 +16,12 @@
         <strong>Fecha inscripcion: </strong>{{ inscripcion.fecha_incripcion }}
       </p>
       <p><strong>Estado: </strong>{{ inscripcion.estado }}</p>
+      <button
+        class="btn btn-danger"
+        (click)="cancelarInscripcion(inscripcion.id)"
+      >
+        Cancelar
+      </button>
     </div>
   </div>
 </div>

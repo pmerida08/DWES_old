@@ -27,21 +27,17 @@ export class LoginComponent implements OnInit {
     console.log('Iniciando sesión', this.usuario);
     this.usuarioService.login(this.usuario).subscribe({
       next: (response) => {
-        // console.log('Token recibido:', response.token);
+        console.log(response);
         localStorage.setItem('jwt', response.token);
-
         this.usuarioService.getUsuario().subscribe({
           next: (userData) => {
             console.log('Datos del usuario:', userData);
-            // localStorage.setItem('userId', userData.id);
-            // localStorage.setItem('userName', userData.nombre);
           },
           error: (error) => {
             console.error('❌ Error al obtener los datos del usuario:', error);
           },
         });
-
-        this.router.navigate(['home']);
+        this.router.navigate(['/home']);
       },
       error: (error) => {
         console.error('❌ Error en la solicitud de inicio de sesión:', error);

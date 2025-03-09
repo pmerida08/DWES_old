@@ -100,4 +100,18 @@ class Actividades extends DBAbstractModel
             return [];
         }
     }
+
+    public function getByCentrosCivicosId($id = "")
+    {
+        if ($id != '') {
+            $this->query = "SELECT * FROM actividades WHERE centcivicos_id = :id";
+            $this->parametros['id'] = $id;
+            $this->get_results_from_query();
+        }
+        if (count($this->rows) >= 1) {
+            return $this->rows;
+        } else {
+            return [];
+        }
+    }
 }

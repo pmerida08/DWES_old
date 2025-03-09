@@ -1,1 +1,20 @@
-<p>cancelar-inscripcion works!</p>
+<div class="container">
+  <h2>Cancelar Inscripción</h2>
+
+  <div class="form-group">
+    <label for="inscripcionId">ID de Inscripción</label>
+    <input
+      type="number"
+      id="inscripcionId"
+      [(ngModel)]="inscripcionId"
+      class="form-control"
+      required
+    />
+  </div>
+
+  <button class="btn btn-danger" (click)="cancelarInscripcion()">
+    Cancelar Inscripción
+  </button>
+
+  <p *ngIf="mensaje">{{ mensaje }}</p>
+</div>

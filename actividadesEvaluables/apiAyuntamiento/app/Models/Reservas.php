@@ -28,12 +28,13 @@ class Reservas extends DBAbstractModel
         foreach ($data as $campo => $valor) {
             $$campo = $valor;
         }
-        $this->query = "INSERT INTO reservas(nom_solicitante,telefono,correo,instalaciones_id,fechahora_inicio, estado) VALUES(:nom_solicitante, :telefono, :correo, :instalaciones_id, :fechahora_inicio, :estado)";
+        $this->query = "INSERT INTO reservas(nom_solicitante,telefono,correo,instalaciones_id,fechahora_inicio, fechahora_final, estado) VALUES(:nom_solicitante, :telefono, :correo, :instalaciones_id, :fechahora_inicio, :fechahora_final, :estado)";
         $this->parametros['nom_solicitante'] = $nom_solicitante;
         $this->parametros['telefono'] = $telefono;
         $this->parametros['correo'] = $correo;
         $this->parametros['instalaciones_id'] = $instalaciones_id;
         $this->parametros['fechahora_inicio'] = $fechahora_inicio;
+        $this->parametros['fechahora_final'] = $fechahora_final;
         $this->parametros['estado'] = 'pendiente';
         $this->get_results_from_query();
         $this->mensaje = 'SH añadido';

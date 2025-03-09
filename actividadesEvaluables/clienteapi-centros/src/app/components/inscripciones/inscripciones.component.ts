@@ -33,7 +33,7 @@ export class InscripcionesComponent {
   }
 
   nuevaInscripcion() {
-    this.router.navigate(['/inscripcion']);
+    this.router.navigate(['/inscripcion/new']);
   }
 
   cancelarInscripcion(id: number) {

@@ -62,13 +62,13 @@ class Inscripciones extends DBAbstractModel
         foreach ($user_data as $campo => $valor) {
             $$campo = $valor;
         }
-        $this->query = "UPDATE inscripciones SET nom_solicitante = :nom_solicitante, telefono = :telefono, correo = :correo, actividades_id = :actividades_id, fecha_inscripcion = :fecha_inscripcion, estado = :estado WHERE id = :id";
+        $this->query = "UPDATE inscripciones SET nom_solicitante = :nom_solicitante, telefono = :telefono, correo = :correo, actividades_id = :actividades_id, fecha_incripcion = :fecha_incripcion, estado = :estado WHERE id = :id";
         $this->parametros['id'] = $id;
         $this->parametros['nom_solicitante'] = $nom_solicitante;
         $this->parametros['telefono'] = $telefono;
         $this->parametros['correo'] = $correo;
         $this->parametros['actividades_id'] = $actividades_id;
-        $this->parametros['fecha_inscripcion'] = $fecha_inscripcion;
+        $this->parametros['fecha_incripcion'] = $fecha_incripcion;
         $this->parametros['estado'] = 'pendiente';
         $this->get_results_from_query();
         $this->mensaje = 'Inscripción modificada';

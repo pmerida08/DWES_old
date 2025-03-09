@@ -1,1 +1,89 @@
-<p>nueva-inscripcion works!</p>
+<div class="container">
+  <h2>Nueva Inscripción</h2>
+
+  <form #inscripcionForm="ngForm" method="post" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nom_solicitante">Nombre del Solicitante</label>
+      <input
+        type="text"
+        id="nom_solicitante"
+        name="nom_solicitante"
+        [(ngModel)]="inscripcion.nom_solicitante"
+        required
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input
+        type="number"
+        id="telefono"
+        name="telefono"
+        [(ngModel)]="inscripcion.telefono"
+        required
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="correo">Correo Electrónico</label>
+      <input
+        type="email"
+        id="correo"
+        name="correo"
+        [(ngModel)]="inscripcion.correo"
+        required
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="actividades_id">Actividad</label>
+      <select
+        id="actividades_id"
+        name="actividades_id"
+        [(ngModel)]="inscripcion.actividades_id"
+        required
+        class="form-control"
+      >
+        <option *ngFor="let actividad of actividades" [value]="actividad.id">
+          {{ actividad.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="fecha_incripcion">Fecha de Inscripción</label>
+      <input
+        type="date"
+        id="fecha_incripcion"
+        name="fecha_incripcion"
+        [(ngModel)]="inscripcion.fecha_incripcion"
+        required
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="estado">Estado</label>
+      <select
+        id="estado"
+        name="estado"
+        [(ngModel)]="inscripcion.estado"
+        required
+        class="form-control"
+      >
+        <option value="pendiente">Pendiente</option>
+        <option value="confirmado">Confirmado</option>
+      </select>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+    >
+      Registrar Inscripción
+    </button>
+  </form>
+</div>

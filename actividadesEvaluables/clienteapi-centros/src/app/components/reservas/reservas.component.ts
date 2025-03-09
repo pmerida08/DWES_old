@@ -36,8 +36,8 @@ export class ReservasComponent {
     this.router.navigate(['/reserva/new']);
   }
 
-  deleteReserva(id: number) {
-    this.reservaService.deleteReserva(id).subscribe({
+  cancelarReserva(id: number) {
+    this.reservaService.cancelarReserva(id).subscribe({
       next: (result: Reserva) => {
         console.log('Reserva eliminada', result);
         this.getReservas();

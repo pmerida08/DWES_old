@@ -1,1 +1,18 @@
-<p>cancelar-reservas works!</p>
+<div class="cancelar-reserva-container">
+  <h2>Cancelar Reserva</h2>
+  <div class="form-group">
+    <label for="reservaId">ID de la Reserva</label>
+    <input
+      type="number"
+      id="reservaId"
+      [(ngModel)]="reservaId"
+      class="form-control"
+      placeholder="Ingrese el ID de la reserva"
+      required
+    />
+  </div>
+  <button class="btn btn-danger" (click)="cancelarReserva()">
+    Cancelar Reserva
+  </button>
+  <p *ngIf="mensaje" class="mensaje">{{ mensaje }}</p>
+</div>

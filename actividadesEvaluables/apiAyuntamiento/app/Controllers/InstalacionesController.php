@@ -39,7 +39,7 @@ class InstalacionesController
 
     private function getInstalaciones($id)
     {
-        $result = $this->instalaciones->get($id);
+        $result = $this->instalaciones->getByCentrosCivicosId($id);
         if (!$result) {
             return $this->notFoundResponse();
         }

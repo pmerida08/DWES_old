@@ -20,13 +20,20 @@ export class InscripcionesService {
   }
 
   nuevaInscripcion(inscripcion: Inscripcion): Observable<Inscripcion> {
+    const token = localStorage.getItem('jwt');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     return this.http.post<Inscripcion>(
       `${this.baseUrl}/inscripciones`,
-      inscripcion
+      inscripcion,
+      { headers }
     );
   }
 
-  cancelarInscripcion(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/inscripciones/${id}`);
+  cancelarInscripcion(id: number): Observable<any> {
+    const token = localStorage.getItem('jwt');
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    return this.http.delete<void>(`${this.baseUrl}/inscripciones/${id}`, {
+      headers,
+    });
   }
 }

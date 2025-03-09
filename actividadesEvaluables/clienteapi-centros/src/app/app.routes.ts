@@ -8,6 +8,8 @@ import { ReservasComponent } from './components/reservas/reservas.component';
 import { InscripcionesComponent } from './components/inscripciones/inscripciones.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ActividadesCentroCivComponent } from './components/actividades-centro-civ/actividades-centro-civ.component';
+import { NuevaInscripcionComponent } from './components/nueva-inscripcion/nueva-inscripcion.component';
+import { NuevaReservasComponent } from './components/nueva-reservas/nueva-reservas.component';
 
 export const routes: Routes = [
     {path: 'centros', component: CentrosComponent},
@@ -24,9 +26,11 @@ export const routes: Routes = [
 
     {path: "reservas", component: ReservasComponent},
     {path: "reservas/:id", component: ReservasComponent},
+    {path: "reserva/new", component: NuevaReservasComponent},
 
     {path: "inscripciones", component: InscripcionesComponent},
     {path: "inscripciones/:id", component: InscripcionesComponent},
+    {path: "inscripcion/new", component: NuevaInscripcionComponent},
     
     {path: "registro", component: RegistroComponent},
     {path: "login", component: LoginComponent},
