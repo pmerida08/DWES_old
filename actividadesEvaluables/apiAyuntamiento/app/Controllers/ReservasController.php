@@ -55,7 +55,7 @@ class ReservasController
 
     private function getAllReservas()
     {
-        $result = $this->reservas->getAll();
+        $result = $this->reservas->getAllReservas();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;

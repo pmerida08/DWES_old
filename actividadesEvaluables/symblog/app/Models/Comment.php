@@ -1,31 +1,17 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Comment extends DBAbstractModel 
+
+
+
+class Comment extends Eloquent
 {
-    private static $instancia;
+   
+    protected $table = 'comment';
+    protected $fillable = ['user', 'comment', 'blog_id'];
+    
+    
 
-    public static function getInstance()
-    {
-        if (!isset(self::$instancia)) {
-            $miclase = __CLASS__;
-            self::$instancia = new $miclase;
-        }
-        return self::$instancia;
-    }
-
-    public function __clone()
-    {
-        trigger_error('La clonación de este objeto no está permitida', E_USER_ERROR);
-    }
-
-    public function getMensaje()
-    {
-        return $this->mensaje;
-    }
-
-    public function setMensaje($mensaje) {
-        $this->mensaje = $mensaje;
-    }
 }

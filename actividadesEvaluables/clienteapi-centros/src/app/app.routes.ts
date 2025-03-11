@@ -10,8 +10,13 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ActividadesCentroCivComponent } from './components/actividades-centro-civ/actividades-centro-civ.component';
 import { NuevaInscripcionComponent } from './components/nueva-inscripcion/nueva-inscripcion.component';
 import { NuevaReservasComponent } from './components/nueva-reservas/nueva-reservas.component';
+import { CuentaComponent } from './components/cuenta/cuenta.component';
+import { UpdateUsuarioComponent } from './components/update-usuario/update-usuario.component';
+import { AppComponent } from './app.component';
 
 export const routes: Routes = [
+    // {path: 'home', component: AppComponent},
+
     {path: 'centros', component: CentrosComponent},
     {path: 'centros/:id', component: CentrosComponent},
     
@@ -35,6 +40,8 @@ export const routes: Routes = [
     {path: "registro", component: RegistroComponent},
     {path: "login", component: LoginComponent},
 
+    {path: "cuenta", component: CuentaComponent},
+    {path: "cuenta/edit", component: UpdateUsuarioComponent},
     {path: "user", component: UsuarioComponent},
     {path: "token/refresh", component: UsuarioComponent},
 

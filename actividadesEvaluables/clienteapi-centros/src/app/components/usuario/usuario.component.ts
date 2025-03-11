@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.css'],  // Ajusta el nombre del archivo CSS
 })
-export class UsuarioComponent {
+export class UsuarioComponent implements OnInit {
   usuario: Usuario = { id: 1, nombre: '', email: '', password: '' };
   loading: boolean = true; // Para mostrar un indicador de carga
 
@@ -42,7 +42,7 @@ export class UsuarioComponent {
     this.usuarioService.refreshToken().subscribe({
       next: (response) => {
         console.log('Token actualizado:', response);
-        // localStorage.setItem('jwt', response.);
+        // localStorage.setItem('jwt', response);
       },
       error: (error) => {
         console.error('❌ Error al renovar el token:', error);

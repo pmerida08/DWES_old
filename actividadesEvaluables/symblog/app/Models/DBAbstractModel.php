@@ -1,170 +1,77 @@
 <?php
-
 namespace App\Models;
-
-use mysqli;
-
-class DBAbstractModel
+abstract class DBAbstractModel
 {
+    private static $db_host = DBHOST;
+    private static $db_user = DBUSER;
+    private static $db_pass = DBPASS;
+    private static $db_name = DBNAME;
+    private static $db_port = DBPORT;
 
-    protected $db_host = DB_HOST;
+    protected $mensaje = "";
+    protected $conn; //Manejador de la BD
+    //Manejo básico para consultas.
+    protected $query; //consulta
+    protected $parametros = array(); //parámetros de entrada
+    protected $rows = array(); //array con los datos de salida
 
-    protected $db_user = DB_USER;
-
-    protected $db_pass = DB_PASS;
-
-    protected $db_name = DB_NAME;
-
-    protected $mensaje = '';
-
-    protected $connection;
-
-    protected $table;
-
-    protected $query;
-
-    protected $parametros = array();
-    public function __construct()
+    //Metodos abstractos para implementar en los diferentes módulos. CRUD
+    abstract protected function get(); //Read
+    abstract protected function set(); //Create
+    abstract protected function edit(); //Update
+    abstract protected function delete(); //Delete
+    #Crear conexión a la base de datos.
+    protected function open_connection()
     {
-        $this->connection();
-    }
+        $dsn = 'mysql:host=' . self::$db_host . ';' . 'dbname=' . self::$db_name . ';' . 'port=' . self::$db_port;
+        try {
+            $this->conn = new \PDO(
+                $dsn,
+                self::$db_user,
+                self::$db_pass,
+                //Se puede incluir BUFFERED_QUERY
+                array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+            );
 
-    public function connection()
-    {
-        $this->connection = new mysqli($this->db_host, $this->db_user, $this->db_pass, $this->db_name);
-
-        if ($this->connection->connect_error) {
-            die('Error de conexión (' . $this->connection->connect_errno . ') '
-                . $this->connection->connect_error);
+            return $this->conn;
+        } catch (\PDOException $e) {
+            printf("Conexión fallida: %s\n", $e->getMessage());
+            exit();
         }
     }
-
-    public function query($sql, $data = [], $params = null)
+    #Método que devuelve el último id introducido.
+    public function lastInsert()
     {
-        if (!empty($data)) {
+        return $this->conn->lastInsertId();
+    }
+    # Desconectar la base de datos
+    private function close_connection()
+    {
+        $this->conn = null;
+    }
 
-            if ($params == null) {
-                $params = str_repeat('s', count($data));
+    protected function get_results_from_query()
+    {
+        $this->open_connection();
+        if (($_stmt = $this->conn->prepare($this->query))) {
+            #PREG_PATTERN_ORDER flag para especificar como se cargan los resultados en $named.
+            if (preg_match_all('/(:\w+)/', $this->query, $_named, PREG_PATTERN_ORDER)) {
+                $_named = array_pop($_named);
+                foreach ($_named as $_param) {
+                    $_stmt->bindValue($_param, $this->parametros[substr($_param, 1)]);
+                }
             }
-
-            $stmt = $this->connection->prepare($sql);
-            $stmt->bind_param($params, ...$data);
-            $stmt->execute();
-            $this->query = $stmt->get_result();
-        } else {
-            $this->query = $this->connection->query($sql);
         }
-        return $this;
-        // $this->query = $this->connection->query($sql);
-
-    }
-
-    public function first()
-    {
-        return $this->query->fetch_assoc();
-    }
-
-    public function get()
-    {
-        return $this->query->fetch_all(MYSQLI_ASSOC);
-    }
-
-    public function paginate($cant = 15)
-    {
-        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-        $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM {$this->table} LIMIT " . ($page - 1) * $cant . ", $cant";
-
-        $data = $this->query($sql)->get();
-        $total = $this->query("SELECT FOUND_ROWS() as total")->first()['total'];
-
-        $uri = $_SERVER['REQUEST_URI'];
-        $uri = trim($uri, '/');
-
-        if (strpos($uri, '?')) {
-            $uri = substr($uri, 0, strpos($uri, '?'));
+        try {
+            if (!$_stmt->execute()) {
+                printf("Error de consulta: %s\n", $_stmt->errorInfo()[2]);
+            }
+            $this->rows = $_stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $_stmt->closeCursor();
+        } catch (\PDOException $e) {
+            printf("Error en consulta: %s\n", $e->getMessage());
         }
-
-        $last_page = ceil($total / $cant);
-
-        return [
-            'total' => $total,
-            'from' => ($page - 1) * $cant + 1,
-            'to' => ($page - 1) * $cant + count($data),
-            'next_page' => $page < $last_page ? '/' . $uri . '?page=' . ($page + 1) : null,
-            'prev_page' => $page > 1 ? '/' . $uri . '?page=' . ($page - 1) : null,
-            'data' => $data,
-        ];
     }
-
-    //Consultas
-
-    public function all()
-    {
-        $sql = "SELECT * FROM {$this->table}";
-
-        return $this->query($sql)->get();
-    }
-
-    public function find($id)
-    {
-        $sql = "SELECT * FROM {$this->table} WHERE id = ?";
-
-        return $this->query($sql, [$id], 'i')->first();
-    }
-
-    public function where($column, $value, $operator = '=')
-    {
-        $sql = "SELECT * FROM {$this->table} WHERE {$column} {$operator} ?";
-        $this->query($sql, [$value], 's');
-
-        return $this;
-    }
-
-    public function create($data)
-    {
-        $columns = array_keys($data);
-        $columns = implode(', ', $columns);
-
-        $values = array_values($data);
-
-        $sql = "INSERT INTO {$this->table} ({$columns}) VALUES (" . str_repeat('?,', count($values) - 1) . "?)";
-
-        $this->query($sql, $values);
-
-        $insert_id = $this->connection->insert_id;
-
-        return $this->find($insert_id);
-    }
-
-    public function update($id, $data)
-    {
-        $values = [];
-        foreach ($data as $key => $value) {
-            $values[] = "{$key} = ?";
-        }
-
-        $values = implode(', ', $values);
-
-        $sql = "UPDATE {$this->table} SET {$values} WHERE id = ?";
-
-        $values = array_values($data);
-        $values[] = $id;
-
-        $this->query($sql, $values);
-
-        return $this->find($id);
-    }
-
-    public function delete($id)
-    {
-        $sql = "DELETE FROM {$this->table} WHERE id = ?";
-
-        $this->query($sql, [$id], 'i');
-    }
-
-    // public function __destruct()
-    // {
-    //     $this->connection->close();
-    // }
 }
+
+?>

@@ -87,16 +87,10 @@ class Reservas extends DBAbstractModel
         $this->mensaje = 'sh eliminado';
     }
 
-    public function getAll()
+    public function getAllReservas()
     {
         $this->query = "SELECT * FROM reservas";
         $this->get_results_from_query();
-        if (count($this->rows) == 1) {
-            $this->mensaje = 'sh encontrado';
-            return $this->rows;
-        } else {
-            $this->mensaje = 'sh no encontrado';
-            return [];
-        }
+        return $this->rows;
     }
 }

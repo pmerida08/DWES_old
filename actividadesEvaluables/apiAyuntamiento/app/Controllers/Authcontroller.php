@@ -16,6 +16,7 @@ class AuthController
         $this->requestMethod = $requestMethod;
         $this->users = Users::getInstancia();
     }
+    
     public function loginFromRequest()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
@@ -52,7 +53,7 @@ class AuthController
                     "expireAt" => $expire_claim
                 )
             );
-            
+
             $response['status_code_header'] = 'HTTP/1.1 201 CREATED';
             $response['body'] = $res;
         } else {
@@ -66,6 +67,7 @@ class AuthController
         }
     }
 
+
     public function registerFromRequest()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
@@ -77,5 +79,12 @@ class AuthController
         $response['body'] = json_encode(array("message" => "Usuario añadido"));
         header($response['status_code_header']);
         echo $response['body'];
+    }
+
+    public function unprocessableEntityResponse($message = null)
+    {
+        $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
+        $response['body'] = json_encode(["message" => $message]);
+        return $response;
     }
 }

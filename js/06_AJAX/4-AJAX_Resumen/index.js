@@ -74,6 +74,8 @@ async function miPeticion1() {
 
 miPeticion1();
 
+
+
 //////////////////////////////// USANDO Axios ////////////////////////////////////////////
 axios.get("https://jsonplaceholder.typicode.com/users")
 .then((response)=>{

@@ -21,7 +21,7 @@ function decodificarToken()
     try {
         $decoded = JWT::decode($jwt, new Key(KEY, 'HS256'));
         // Log o imprimir el token decodificado para ver la estructura
-        echo json_encode($decoded);
+        // echo json_encode($decoded);
         $idUser = $decoded->data->userId;
         return $idUser;
     } catch (Exception $e) {

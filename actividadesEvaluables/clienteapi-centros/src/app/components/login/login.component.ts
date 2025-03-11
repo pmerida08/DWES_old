@@ -19,15 +19,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     const token = localStorage.getItem('jwt');
     if (token) {
-      this.router.navigate(['home']);
+      this.router.navigate(['/home']);
     }
   }
 
   onSubmit() {
-    console.log('Iniciando sesión', this.usuario);
     this.usuarioService.login(this.usuario).subscribe({
       next: (response) => {
-        console.log(response);
         localStorage.setItem('jwt', response.token);
         this.usuarioService.getUsuario().subscribe({
           next: (userData) => {
@@ -37,7 +35,7 @@ export class LoginComponent implements OnInit {
             console.error('❌ Error al obtener los datos del usuario:', error);
           },
         });
-        this.router.navigate(['/home']);
+        this.router.navigate(['home']);
       },
       error: (error) => {
         console.error('❌ Error en la solicitud de inicio de sesión:', error);

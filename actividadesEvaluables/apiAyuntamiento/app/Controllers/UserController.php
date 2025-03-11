@@ -36,9 +36,10 @@ class UserController
             case 'POST':
                 if ($_SERVER['REQUEST_URI'] === '/register/') {
                     $response = $this->register();
-                } elseif ($_SERVER['REQUEST_URI'] === '/login/') {
+                } else
+                if ($_SERVER['REQUEST_URI'] === '/login/') {
                     $response = $this->login();
-                } elseif ($_SERVER['REQUEST_URI'] === '/token/refresh/') {
+                } elseif ($_SERVER['REQUEST_URI'] === '/token/refresh') {
                     $response = $this->tokenRefresh();
                 }
                 break;
@@ -90,6 +91,7 @@ class UserController
     {
         $usuarioId = decodificarToken();
         $result = $this->user->get($usuarioId);
+        // var_dump($result);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;

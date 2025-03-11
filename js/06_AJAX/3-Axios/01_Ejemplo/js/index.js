@@ -14,3 +14,19 @@ axios.get("https://jsonplaceholder.typicode.com/user")
     console.log("---Me muestro seguro---");
     
 })
+
+axios.post("https://jsonplaceholder.typicode.com/users", {
+    name: "María",
+    username: "ProfeDWEC",
+    email: "maria@iesgrancapitan.com"
+})
+.then(response => {
+    console.log("Usuario creado:");
+    console.log(response.data);
+})
+.catch(error => {
+    console.log("Tenemos un error ", error.response?.status);
+})
+.finally(() => {
+    console.log("---Me muestro seguro---");
+});

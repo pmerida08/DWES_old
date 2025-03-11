@@ -1,0 +1,12 @@
+<div class="usuario-container">
+  <h2>Perfil de Usuario</h2>
+
+  <div *ngIf="usuario">
+    <div class="usuario-card">
+      <h3>{{ usuario.nombre }}</h3>
+      <p><strong>Email: </strong>{{ usuario.email }}</p>
+      <p><strong>Contraseña: </strong> {{ usuario.password }}</p>
+      <button class="btn btn-primary" (click)="editarUsuario()">Editar</button>
+    </div>
+  </div>
+</div>

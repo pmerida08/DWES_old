@@ -20,7 +20,7 @@
         <a href="actividadesEvaluables/index.php">Actividades Evaluables</a>
         <a href="repaso/index.php">Repaso</a>
         <a href="testeando/index.php">Testeando</a>
-        <a href="js/06_AJAX/">JS</a>
+        <a href="js/">JS</a>
     </ul>
 
 </body>
