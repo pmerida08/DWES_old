@@ -166,7 +166,7 @@ $router->add([
 
 $router->add([
     'name' => 'misReservas',
-    'path' => '/^\/reservas$/',
+    'path' => '/^\/reservas\/(\d+)$/',
     'action' => ReservasController::class,
     'auth' => ['usuario'],
 ]);
@@ -188,7 +188,7 @@ $router->add([
 
 $router->add([
     'name' => 'misInscripciones',
-    'path' => '/^\/inscripciones$/', 
+    'path' => '/^\/inscripciones\/(\d+)$/', 
     'action' => InscripcionesController::class,
     'auth' => ['usuario'],
 ]);

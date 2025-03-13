@@ -16,5 +16,5 @@
 {% endblock %}
 
 {% block sidebar %}
-    {{ include("sidebar.twig", { tags: tags, allComments: data.comments }) }}
+    {{ include("sidebar.twig", { data: data }) }}
 {% endblock %}

@@ -4,6 +4,8 @@ namespace App\Models;
 
 require_once("DBAbstractModel.php");
 
+require_once __DIR__ . '/../lib/DecodificarToken.php';
+
 class Inscripciones extends DBAbstractModel
 {
     //Singleton
@@ -27,13 +29,14 @@ class Inscripciones extends DBAbstractModel
         foreach ($data as $campo => $valor) {
             $$campo = $valor;
         }
-        $this->query = "INSERT INTO inscripciones(nom_solicitante,telefono,correo,actividades_id, fecha_incripcion, estado) VALUES(:nom_solicitante, :telefono, :correo, :actividades_id, :fecha_incripcion, :estado)";
+        $this->query = "INSERT INTO inscripciones(nom_solicitante,telefono,correo,actividades_id, fecha_incripcion, estado, usuario_id) VALUES(:nom_solicitante, :telefono, :correo, :actividades_id, :fecha_incripcion, :estado, :usuario_id)";
         $this->parametros['nom_solicitante'] = $nom_solicitante;
         $this->parametros['telefono'] = $telefono;
         $this->parametros['correo'] = $correo;
         $this->parametros['actividades_id'] = $actividades_id;
         $this->parametros['fecha_incripcion'] = $fecha_incripcion;
         $this->parametros['estado'] = 'pendiente';
+        $this->parametros['usuario_id'] = decodificarToken();
         $this->get_results_from_query();
         $this->mensaje = 'Inscripción añadida';
     }
@@ -98,17 +101,13 @@ class Inscripciones extends DBAbstractModel
         }
     }
 
-    public function getAll()
+    public function getInscripcionesByUserId($id = "")
     {
-        $this->query = "SELECT * FROM inscripciones";
-        $this->get_results_from_query();
-
-        if (count($this->rows) >= 1) {
-            $this->mensaje = 'Inscripciones encontradas';
-            return $this->rows;
-        } else {
-            $this->mensaje = 'Inscripciones no encontradas';
-            return [];
+        if ($id != '') {
+            $this->query = "SELECT * FROM inscripciones WHERE usuario_id = :id";
+            $this->parametros['id'] = $id;
+            $this->get_results_from_query();
         }
+        return count($this->rows) > 0 ? $this->rows : [];
     }
 }

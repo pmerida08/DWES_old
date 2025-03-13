@@ -13,8 +13,9 @@ export class ReservasService {
 
   getReservas(): Observable<Reserva[]> {
     const token = localStorage.getItem('jwt');
+    const user_id = localStorage.getItem('user_id');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    return this.http.get<Reserva[]>(`${this.baseUrl}/reservas`, { headers });
+    return this.http.get<Reserva[]>(`${this.baseUrl}/reservas/${user_id}`, { headers });
   }
 
   nuevaReserva(reserva: Reserva): Observable<Reserva> {

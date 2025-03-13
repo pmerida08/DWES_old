@@ -12,10 +12,9 @@ import { Instalacion } from '../../models/instalacion';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './nueva-reservas.component.html',
-  styleUrl: './nueva-reservas.component.css'
+  styleUrl: './nueva-reservas.component.css',
 })
 export class NuevaReservasComponent implements OnInit {
-
   reserva: Reserva = {
     id: 0,
     nom_solicitante: '',
@@ -24,14 +23,18 @@ export class NuevaReservasComponent implements OnInit {
     instalaciones_id: '',
     fechahora_inicio: '',
     fechahora_final: '',
-    estado: 'pendiente'
+    estado: 'pendiente',
+    usuario_id: 0,
   };
 
+  usuario_id = localStorage.getItem('user_id');
   instalaciones: Instalacion[] = [];
 
   constructor(
-    private reservaService: ReservasService, private instalacionesService: InstalacionesService, private router: Router) {}
-  
+    private reservaService: ReservasService,
+    private instalacionesService: InstalacionesService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getInstalaciones();
@@ -51,23 +54,12 @@ export class NuevaReservasComponent implements OnInit {
 
   onSubmit() {
     this.reservaService.nuevaReserva(this.reserva).subscribe({
-      next: (result: any) => {
-        console.log('Reserva realizada', result);
-        if (result && result.id) {
-          this.router.navigate(['/reservas']);
-        } else {
-          console.warn('La reserva se creó pero la respuesta no es la esperada:', result);
-        }
+      next: () => {
+        this.router.navigate(['/reservas']);
       },
       error: (error) => {
-        if (error.status === 201) {
-          console.log('Reserva creada con estado 201, manejándola como éxito.');
-          this.router.navigate(['/reservas']);
-        } else {
-          console.error('Error realizando reserva', error);
-        }
+        console.error('Error realizando reserva', error);
       },
     });
   }
-  
 }

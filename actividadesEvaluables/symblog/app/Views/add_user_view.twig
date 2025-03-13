@@ -1,10 +1,10 @@
 {% extends "layout.twig" %}
 
 {% block body %}
-    <h2>Add user</h2>
-    <p>Want to add a user?</p>
+    <h2>Register</h2>
+    <p>Want to register?</p>
 
-    <form action="/adduser" method="post">
+    <form action="/register" method="post">
         <label for="user">User:</label>
         <input type="text" id="user" name="user" required="required" />
         <label for="nombre">Nombre:</label>
@@ -13,6 +13,8 @@
         <input type="email" id="email" name="email" required="required" />
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required="required" />
+        
+        {% if data.auth and data.user.perfil == 'admin' %}
         <div>
             <label for="perfil">Perfil:</label>
             <select id="perfil" name="perfil">
@@ -20,10 +22,12 @@
                 <option value="user">User</option>
             </select>
         </div>
+        {% endif %}
+        
         <input type="submit" name="submit" value="Submit" />
     </form>
 {% endblock %}
 
 {% block sidebar %}
-    {{ include("sidebar.twig", { tags: tags, allComments: data.comments }) }}
+    {{ include("sidebar.twig", { data: data }) }}
 {% endblock %}

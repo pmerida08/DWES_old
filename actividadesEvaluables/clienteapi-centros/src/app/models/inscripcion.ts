@@ -6,4 +6,5 @@ export interface Inscripcion {
   actividades_id: number;
   fecha_incripcion: string;
   estado: string;
+  usuario_id: number;
 }

@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\Reservas;
 
+require_once __DIR__ . '/../lib/DecodificarToken.php';
+
 class ReservasController
 {
     private $requestMethod;
@@ -42,20 +44,9 @@ class ReservasController
         }
     }
 
-    private function getReservas($id)
-    {
-        $result = $this->reservas->get($id);
-        if (!$result) {
-            return $this->notFoundResponse();
-        }
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
-    }
-
     private function getAllReservas()
     {
-        $result = $this->reservas->getAllReservas();
+        $result = $this->reservas->getReservasByUserId(decodificarToken());
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;

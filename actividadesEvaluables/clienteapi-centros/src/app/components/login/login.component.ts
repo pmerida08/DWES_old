@@ -30,12 +30,13 @@ export class LoginComponent implements OnInit {
         this.usuarioService.getUsuario().subscribe({
           next: (userData) => {
             console.log('Datos del usuario:', userData);
+            localStorage.setItem('user_id', userData[0].id);
+            this.router.navigate(['/home']);
           },
           error: (error) => {
             console.error('❌ Error al obtener los datos del usuario:', error);
           },
         });
-        this.router.navigate(['home']);
       },
       error: (error) => {
         console.error('❌ Error en la solicitud de inicio de sesión:', error);

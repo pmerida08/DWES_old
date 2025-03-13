@@ -4,6 +4,8 @@ namespace App\Models;
 
 require_once("DBAbstractModel.php");
 
+require_once __DIR__ . '/../lib/DecodificarToken.php';
+
 class Reservas extends DBAbstractModel
 {
     //Singleton
@@ -24,11 +26,10 @@ class Reservas extends DBAbstractModel
 
     public function set($data = array()) // funciona
     {
-        echo 'entra a bd';
         foreach ($data as $campo => $valor) {
             $$campo = $valor;
         }
-        $this->query = "INSERT INTO reservas(nom_solicitante,telefono,correo,instalaciones_id,fechahora_inicio, fechahora_final, estado) VALUES(:nom_solicitante, :telefono, :correo, :instalaciones_id, :fechahora_inicio, :fechahora_final, :estado)";
+        $this->query = "INSERT INTO reservas(nom_solicitante,telefono,correo,instalaciones_id,fechahora_inicio, fechahora_final, estado, usuario_id) VALUES(:nom_solicitante, :telefono, :correo, :instalaciones_id, :fechahora_inicio, :fechahora_final, :estado, :usuario_id)";
         $this->parametros['nom_solicitante'] = $nom_solicitante;
         $this->parametros['telefono'] = $telefono;
         $this->parametros['correo'] = $correo;
@@ -36,6 +37,7 @@ class Reservas extends DBAbstractModel
         $this->parametros['fechahora_inicio'] = $fechahora_inicio;
         $this->parametros['fechahora_final'] = $fechahora_final;
         $this->parametros['estado'] = 'pendiente';
+        $this->parametros['usuario_id'] = decodificarToken();
         $this->get_results_from_query();
         $this->mensaje = 'SH añadido';
     }
@@ -91,6 +93,16 @@ class Reservas extends DBAbstractModel
     {
         $this->query = "SELECT * FROM reservas";
         $this->get_results_from_query();
+        return $this->rows;
+    }
+
+    public function getReservasByUserId($id = "")
+    {
+        if ($id != '') {
+            $this->query = "SELECT * FROM reservas WHERE usuario_id = :id";
+            $this->parametros['id'] = $id;
+            $this->get_results_from_query();
+        }
         return $this->rows;
     }
 }

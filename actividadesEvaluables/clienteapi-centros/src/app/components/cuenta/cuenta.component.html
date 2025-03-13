@@ -4,8 +4,8 @@
   <div *ngIf="usuario">
     <div class="usuario-card">
       <h3>{{ usuario.nombre }}</h3>
-      <p><strong>Email: </strong>{{ usuario.email }}</p>
-      <p><strong>Contraseña: </strong> {{ usuario.password }}</p>
+      <div class="p"><strong>Email: </strong>{{ usuario.email }}</div>
+      <div><strong>Contraseña: </strong> <input value="{{ usuario.password }}" type="password" disabled></div>
       <button class="btn btn-primary" (click)="editarUsuario()">Editar</button>
     </div>
   </div>

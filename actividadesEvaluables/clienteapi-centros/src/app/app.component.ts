@@ -20,7 +20,7 @@ export class AppComponent {
   logout() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('jwt_expires');
-    localStorage.removeItem('user');
+    localStorage.removeItem('user_id');
     this.isAuthenticated = false;
   }
 

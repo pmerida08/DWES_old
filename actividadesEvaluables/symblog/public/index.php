@@ -41,9 +41,13 @@ $map->get('admin', '/admin', ['controller' => UsersController::class, 'action' =
 // Router para cerrar sesión
 $map->get('logout', '/logout', ['controller' => UsersController::class, 'action' => 'logoutAction', 'auth' => true]);
 
+$map->get('registerForm', '/register', ['controller' => UsersController::class, 'action' => 'registerFormAction', 'auth' => false]);
+$map->post('register', '/register', ['controller' => UsersController::class, 'action' => 'registerAction', 'auth' => false]);
 
 
 $map->post('saveBlog', '/addblog', ['controller' => BlogsController::class, 'action' => 'addBlogAction' , 'auth' => true]);
+
+$map->post("Agregar comentario", "/postComment", ['controller' => BlogsController::class, 'action' => 'addCommentAction', 'auth' => false]);
 
 
 // Obtener el adaptador de Aura Router
@@ -77,13 +81,3 @@ if (!$route) {
     
     
 }
-
-
-
-
-
-
-
-
-
-

@@ -50,7 +50,8 @@ class AuthController
                     "message" => "Login correcto",
                     "jwt" => $jwt,
                     "email" => $usuario,
-                    "expireAt" => $expire_claim
+                    "expireAt" => $expire_claim,
+                    "userId" => $usuarioId
                 )
             );
 

@@ -4,11 +4,13 @@ namespace App\Controllers;
 
 use App\Models\Inscripciones;
 
+require_once __DIR__ . '/../lib/DecodificarToken.php';
 class InscripcionesController
 {
     private $requestMethod;
     private $inscripcionesId;
     private $inscripciones;
+
 
     public function __construct($requestMethod, $inscripcionesId)
     {
@@ -42,20 +44,9 @@ class InscripcionesController
         }
     }
 
-    private function getInscripciones($id)
-    {
-        $result = $this->inscripciones->get($id);
-        if (!$result) {
-            return $this->notFoundResponse();
-        }
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
-    }
-
     private function getAllInscripciones()
     {
-        $result = $this->inscripciones->getAll();
+        $result = $this->inscripciones->getInscripcionesByUserId(decodificarToken());
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;

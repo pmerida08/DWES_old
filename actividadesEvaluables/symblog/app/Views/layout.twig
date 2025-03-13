@@ -27,11 +27,14 @@
         <li>
           <a href="/login">Login</a>
         </li>
+        <li>
+          <a href="/register">Register</a>
+        </li>
       {% endif %}
     </ul>
   </nav>
 {% endblock %}
 
 {% block sidebar %}
-    {{ include ("sidebar.twig") }}
+    {{ include ("sidebar.twig", { data: data }) }}
 {% endblock %}

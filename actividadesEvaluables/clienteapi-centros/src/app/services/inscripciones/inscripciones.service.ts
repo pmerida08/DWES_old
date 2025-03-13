@@ -13,8 +13,9 @@ export class InscripcionesService {
 
   getInscripciones(): Observable<Inscripcion[]> {
     const token = localStorage.getItem('jwt');
+    const user_id = localStorage.getItem('user_id');
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    return this.http.get<Inscripcion[]>(`${this.baseUrl}/inscripciones`, {
+    return this.http.get<Inscripcion[]>(`${this.baseUrl}/inscripciones/${user_id}`, {
       headers,
     });
   }

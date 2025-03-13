@@ -31,9 +31,4 @@ export class CentrosComponent implements OnInit {
       },
     });
   }
-
-  verCentro(id: number) {
-    this.router.navigate(['/centro', id]);
-    console.log('Ver centro', id);
-  }
 }

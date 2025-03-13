@@ -12,7 +12,7 @@ import { Actividades } from '../../models/actividades';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './nueva-inscripcion.component.html',
-  styleUrl: './nueva-inscripcion.component.css'
+  styleUrl: './nueva-inscripcion.component.css',
 })
 export class NuevaInscripcionComponent implements OnInit {
 
@@ -23,9 +23,11 @@ export class NuevaInscripcionComponent implements OnInit {
     correo: '',
     actividades_id: 0,
     fecha_incripcion: '',
-    estado: 'pendiente'
+    estado: 'pendiente',
+    usuario_id: 0,
   };
 
+  usuario_id = localStorage.getItem('user_id');
   actividades: Actividades[] = [];
 
   constructor(
@@ -52,8 +54,7 @@ export class NuevaInscripcionComponent implements OnInit {
 
   onSubmit() {
     this.inscripcionService.nuevaInscripcion(this.inscripcion).subscribe({
-      next: (result: Inscripcion) => {
-        console.log('Inscripción realizada', result);
+      next: () => {
         this.router.navigate(['/inscripciones']);
       },
       error: (error) => {

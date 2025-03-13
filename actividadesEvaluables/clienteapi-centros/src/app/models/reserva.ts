@@ -7,4 +7,5 @@ export interface Reserva {
     fechahora_inicio: string;
     fechahora_final: string;
     estado: string;
+    usuario_id: number;
 }
