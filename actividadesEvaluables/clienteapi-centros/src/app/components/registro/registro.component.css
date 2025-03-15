@@ -26,7 +26,7 @@ h2 {
 }
 
 .form-control {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 1px solid #bdc3c7;
   border-radius: 5px;
@@ -47,4 +47,10 @@ h2 {
 
 .btn-primary:hover {
   background: #2ecc71;
+}
+
+.error-text {
+  color: #c0392b;
+  font-size: 14px;
+  margin-top: 5px;  
 }

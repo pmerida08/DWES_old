@@ -22,7 +22,7 @@
         <label for="instalaciones_id">Instalación</label>
         <select id="instalaciones_id" name="instalaciones_id" [(ngModel)]="reserva.instalaciones_id" required class="form-control">
           <option *ngFor="let instalacion of instalaciones" [value]="instalacion.id">
-            {{ instalacion.nombre }}
+            {{ instalacion.nombre }} - {{ getCentrosById(instalacion.centcivicos_id) }}
           </option>
         </select>
       </div>

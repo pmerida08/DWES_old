@@ -6,6 +6,8 @@ import { InscripcionesService } from '../../services/inscripciones/inscripciones
 import { ActividadesService } from '../../services/actividades/actividades.service';
 import { Router } from '@angular/router';
 import { Actividades } from '../../models/actividades';
+import { CentroCivico } from '../../models/centroCivico';
+import { CentrosService } from '../../services/centros/centros.service';
 
 @Component({
   selector: 'app-nueva-inscripcion',
@@ -15,7 +17,6 @@ import { Actividades } from '../../models/actividades';
   styleUrl: './nueva-inscripcion.component.css',
 })
 export class NuevaInscripcionComponent implements OnInit {
-
   inscripcion: Inscripcion = {
     id: 0,
     nom_solicitante: '',
@@ -29,27 +30,47 @@ export class NuevaInscripcionComponent implements OnInit {
 
   usuario_id = localStorage.getItem('user_id');
   actividades: Actividades[] = [];
+  centros: CentroCivico[] = [];
 
   constructor(
     private inscripcionService: InscripcionesService,
     private actividadesService: ActividadesService,
+    private centroService: CentrosService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.getActividades();
+    this.getCentros();
   }
 
   getActividades() {
     this.actividadesService.getActividades().subscribe({
       next: (result: Actividades[]) => {
-        console.log('Actividades obtenidas', result);
+        // console.log('Actividades obtenidas', result);
         this.actividades = result;
       },
       error: (error) => {
         console.error('Error obteniendo actividades', error);
       },
     });
+  }
+
+  getCentros() {
+    this.centroService.getCentros().subscribe({
+      next: (result: CentroCivico[]) => {
+        // console.log('Centros obtenidos', result);
+        this.centros = result;
+      },
+      error: (error) => {
+        console.error('Error obteniendo centros', error);
+      },
+    });
+  }
+
+  getCentrosById(id: number): string {
+    const centro = this.centros.find((centro) => centro.id === id);
+    return centro ? centro.nombre : 'Centro no disponible';
   }
 
   onSubmit() {

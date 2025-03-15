@@ -6,6 +6,8 @@ import { ReservasService } from '../../services/reservas/reservas.service';
 import { InstalacionesService } from '../../services/instalaciones/instalaciones.service';
 import { Router } from '@angular/router';
 import { Instalacion } from '../../models/instalacion';
+import { CentroCivico } from '../../models/centroCivico';
+import { CentrosService } from '../../services/centros/centros.service';
 
 @Component({
   selector: 'app-nueva-reservas',
@@ -29,15 +31,18 @@ export class NuevaReservasComponent implements OnInit {
 
   usuario_id = localStorage.getItem('user_id');
   instalaciones: Instalacion[] = [];
+  centros: CentroCivico[] = [];
 
   constructor(
     private reservaService: ReservasService,
     private instalacionesService: InstalacionesService,
+    private centroService: CentrosService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.getInstalaciones();
+    this.getCentros();
   }
 
   getInstalaciones() {
@@ -51,6 +56,24 @@ export class NuevaReservasComponent implements OnInit {
       },
     });
   }
+
+  getCentros() {
+    this.centroService.getCentros().subscribe({
+      next: (result: CentroCivico[]) => {
+        console.log('Centros obtenidos', result);
+        this.centros = result;
+      },
+      error: (error) => {
+        console.error('Error obteniendo centros', error);
+      },
+    });
+  }
+
+  getCentrosById(id: number): string {
+    const centro = this.centros.find((centro) => centro.id === id);
+    return centro ? centro.nombre : 'Centro no disponible';
+  }
+
 
   onSubmit() {
     this.reservaService.nuevaReserva(this.reserva).subscribe({

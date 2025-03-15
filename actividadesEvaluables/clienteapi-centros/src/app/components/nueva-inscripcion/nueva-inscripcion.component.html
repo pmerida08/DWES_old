@@ -49,6 +49,7 @@
       >
         <option *ngFor="let actividad of actividades" [value]="actividad.id">
           {{ actividad.nombre }}
+          - {{ getCentrosById(actividad.centcivicos_id) }}
         </option>
       </select>
     </div>
@@ -91,11 +92,6 @@
       />
     </div>
 
-    <button
-      type="submit"
-      class="btn btn-primary"
-    >
-      Registrar Inscripción
-    </button>
+    <button type="submit" class="btn btn-primary">Registrar Inscripción</button>
   </form>
 </div>

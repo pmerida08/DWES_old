@@ -1,16 +1,64 @@
 <h2>Regístrate</h2>
 <form action="" method="post" class="form-container" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" id="nombre" class="form-control" [(ngModel)]="usuario.nombre">
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" class="form-control" [(ngModel)]="usuario.email">
-    </div>
-    <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" name="password" id="password" class="form-control" [(ngModel)]="usuario.password">
-    </div>
-    <button type="submit" class="btn btn-primary">Registrarse</button>
+  <div class="form-group">
+    <label for="nombre">Nombre</label>
+    <input
+      type="text"
+      name="nombre"
+      id="nombre"
+      class="form-control"
+      [(ngModel)]="usuario.nombre"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      name="email"
+      id="email"
+      class="form-control"
+      [(ngModel)]="usuario.email"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="password">Contraseña</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      class="form-control"
+      [(ngModel)]="usuario.password"
+      required
+    />
+  </div>
+
+  <!-- Repetir Contraseña -->
+  <div class="form-group">
+    <label for="confirmPassword">Repetir Contraseña</label>
+    <input
+      type="password"
+      name="confirmPassword"
+      id="confirmPassword"
+      class="form-control"
+      [(ngModel)]="confirmPassword"
+      required
+    />
+  </div>
+
+  <span *ngIf="usuario.password !== confirmPassword" class="error-text">
+    Las contraseñas no coinciden
+    </span>
+
+  <!-- Botón solo habilitado si las contraseñas coinciden -->
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="usuario.password !== confirmPassword"
+  >
+    Registrarse
+  </button>
 </form>
