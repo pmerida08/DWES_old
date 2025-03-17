@@ -10,7 +10,10 @@
       <p><strong>Telefono: </strong>{{ inscripcion.telefono }}</p>
       <p><strong>Correo: </strong>{{ inscripcion.correo }}</p>
       <p>
-        <strong>Actividad asignada: </strong>{{ inscripcion.actividades_id }}
+        <strong>Actividad asignada: </strong>{{ getActividadesInscripcion(inscripcion.actividades_id) }}
+      </p>
+      <p>
+        <strong>Centro Civico: </strong>{{ getCentrosActividades(getActividadesId(inscripcion.actividades_id)) }}
       </p>
       <p>
         <strong>Fecha inscripcion: </strong>{{ inscripcion.fecha_incripcion }}

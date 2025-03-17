@@ -6,7 +6,8 @@
             <h3>{{ instalacion.nombre }}</h3>
             <p><strong>Descripcion: </strong>{{ instalacion.descripcion }}</p>
             <p><strong>Capacidad: </strong>{{ instalacion.capacidad_max }}</p>
-            <p><strong>Centro civico asignado: </strong>{{ instalacion.centcivicos_id }}</p>
+            <p><strong>Centro civico asignado: </strong>{{ getCentroById(instalacion.centcivicos_id) }}</p>
+            <button (click)="reservarInstalacion(instalacion.id)">Reservar</button>
         </div>
     </div>
 </div>

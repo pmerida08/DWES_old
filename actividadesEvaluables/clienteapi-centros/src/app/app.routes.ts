@@ -12,7 +12,6 @@ import { NuevaInscripcionComponent } from './components/nueva-inscripcion/nueva-
 import { NuevaReservasComponent } from './components/nueva-reservas/nueva-reservas.component';
 import { CuentaComponent } from './components/cuenta/cuenta.component';
 import { UpdateUsuarioComponent } from './components/update-usuario/update-usuario.component';
-import { AppComponent } from './app.component';
 
 export const routes: Routes = [
     // {path: 'home', component: AppComponent},
@@ -31,7 +30,7 @@ export const routes: Routes = [
 
     {path: "reservas", component: ReservasComponent},
     {path: "reservas/:id", component: ReservasComponent},
-    {path: "reserva/new", component: NuevaReservasComponent},
+    {path: "reserva/new/:id", component: NuevaReservasComponent},
 
     {path: "inscripciones", component: InscripcionesComponent},
     {path: "inscripciones/:id", component: InscripcionesComponent},
